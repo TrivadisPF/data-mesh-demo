@@ -1005,7 +1005,7 @@
       #
       # ===== Hasura ========
       #
-      HASURA_enable: false
+      HASURA_enable: true
       #
       # ===== GraphQL Mesh ========
       #

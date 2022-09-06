@@ -8,6 +8,7 @@ networks:
   default:
     name: demo-platform
 # backward compatiblity to platform < 1.14.0
+# enforce some dependencies
 # Enable PostgreSQL or MySQL for MLflow server
 services:
   #  ================================== Apache Spark 2.x ========================================== #
@@ -322,6 +323,28 @@ services:
     volumes:
       - ./data-transfer:/data-transfer
     tty: true
+    restart: unless-stopped
+  #  ================================== Hasura ========================================== #
+  hasura:
+    image: hasura/graphql-engine:v2.11.1
+    container_name: hasura
+    hostname: hasura
+    labels:
+      com.platys.name: hasura
+      com.platys.webui.title: Hasura UI
+      com.platys.webui.url: http://${PUBLIC_IP}:28177
+    ports:
+      - 28177:8080
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://demo:abc123!@postgresql:5432/demodb
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true' # set to "false" to disable console
+      HASURA_GRAPHQL_DEV_MODE: 'true'
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      HASURA_GRAPHQL_LIVE_QUERIES_MULTIPLEXED_REFETCH_INTERVAL: 1000
+      ## uncomment next line to set an admin secret
+      # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+    volumes:
+      - ./data-transfer:/data-transfer
     restart: unless-stopped
   #  ================================== Minio ========================================== #
   minio-1:

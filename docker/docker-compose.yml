@@ -442,6 +442,15 @@ services:
       - .:/variables
       - ./artefacts:/output
       - ./data-transfer:/data-transfer
+  #  ================================== data-provisioning ========================================== #
+  data-provisioning:
+    image: trivadis/platys-modern-data-platform-data:latest
+    container_name: data-provisioning
+    hostname: data-provisioning
+    labels:
+      com.platys.name: data-provisioning
+    volumes:
+      - ./data-transfer:/data-transfer
 volumes:
   data-transfer-vol:
     name: data_transfer_vol

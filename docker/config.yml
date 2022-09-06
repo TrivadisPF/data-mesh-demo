@@ -37,7 +37,7 @@
       # ========================================================================
       # Platys Services
       # ========================================================================
-      PROVISIONING_DATA_enable: false
+      PROVISIONING_DATA_enable: true
       #
       # ===== Apache Zookeeper ========
       #

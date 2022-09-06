@@ -11,7 +11,7 @@ CREATE TABLE "mdm"."airport_t" (
     CONSTRAINT "airport_pk" PRIMARY KEY ("iata")
 ) WITH (oids = false);
 
-INSERT INTO "airport_t" ("iata", "airport", "city", "state", "country", "lat", "long") VALUES
+INSERT INTO "mdm"."airport_t" ("iata", "airport", "city", "state", "country", "lat", "long") VALUES
 ('00M',	'Thigpen ',	'Bay Springs',	'MS',	'USA',	31.95376472,	-89.23450472),
 ('00R',	'Livingston Municipal',	'Livingston',	'TX',	'USA',	30.68586111,	-95.01792778),
 ('00V',	'Meadow Lake',	'Colorado Springs',	'CO',	'USA',	38.94574889,	-104.5698933),

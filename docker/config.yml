@@ -1005,7 +1005,7 @@
       #
       # ===== Hasura ========
       #
-      HASURA_enable: false
+      HASURA_enable: true
       #
       # ===== GraphQL Mesh ========
       #
@@ -1013,7 +1013,8 @@
       #
       # ===== Tyk API Gateway ========
       #
-      TYK_enable: false
+      TYK_enable: true
+      TYK_edition: 'pro'
       #
       # ===== Kong API Gateway ========
       #

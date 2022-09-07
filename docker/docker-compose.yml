@@ -346,6 +346,82 @@ services:
     volumes:
       - ./data-transfer:/data-transfer
     restart: unless-stopped
+  #  ================================== Tyk Gateway ========================================== #
+  tyk-gateway:
+    image: docker.tyk.io/tyk-gateway/tyk-gateway:v4.1.0
+    container_name: tyk-gateway
+    hostname: tyk-gateway
+    labels:
+      com.platys.name: tyk-gateway
+      com.platys.restapi.title: Tyk API Gateway Admin API
+      com.platys.restapi.url: http://${PUBLIC_IP}:28280
+    ports:
+      - 28280:8080
+    environment:
+      - TYK_GW_LISTENPORT=8080
+      - TYK_GW_SECRET=abc123!
+      - TYK_GW_POLICIES_POLICYSOURCE=service
+      - TYK_GW_POLICIES_POLICYCONNECTIONSTRING=http://tyk-dashboard:3000
+      - TYK_GW_POLICIES_POLICYRECORDNAME=tyk_policies
+      - TYK_GW_POLICIES_ALLOWEXPLICITPOLICYID=true
+      - TYK_GW_USEDBAPPCONFIGS=true
+      - TYK_GW_DBAPPCONFOPTIONS_CONNECTIONSTRING=http://tyk-dashboard:3000
+      - TYK_GW_DBAPPCONFOPTIONS_NODEISSEGMENTED=false
+      - TYK_GW_DBAPPCONFOPTIONS_TAGS=
+      - TYK_GW_DISABLEDASHBOARDZEROCONF=false
+      - TYK_GW_STORAGE_TYPE=redis
+      - TYK_GW_STORAGE_ADDRS=tyk-redis:6379
+      - TYK_GW_ENABLEANALYTICS=true
+      - TYK_GW_ANALYTICSCONFIG_TYPE=mongo
+    volumes:
+      - ./data-transfer:/data-transfer
+      - ./conf/tyk/tyk.standalone.conf:/opt/tyk-gateway/tyk.conf
+#      - ./apps:/opt/tyk-gateway/apps
+#      - ./middleware:/opt/tyk-gateway/middleware
+#      - ./security/tyk/certs:/opt/tyk-gateway/certs
+    restart: unless-stopped
+  tyk-redis:
+    image: redis:6.2.7-alpine
+    container_name: tyk-redis
+    hostname: tyk-redis
+    labels:
+      com.platys.name: redis
+    ports:
+      - 6386:6379
+    volumes:
+      - ./data-transfer:/data-transfer
+    restart: unless-stopped
+  tyk-dashboard:
+    image: tykio/tyk-dashboard:v4.1.0
+    container_name: tyk-dashboard
+    hostname: tyk-dashboard
+    labels:
+      com.platys.name: tyk-dashboard
+      com.platys.webui.title: Tyk Dashboard UI
+      com.platys.webui.url: http://${PUBLIC_IP}:28281
+    ports:
+      - 28281:3000
+    environment:
+      - TYK_DB_LICENSEKEY=${TYK_DB_LICENSEKEY}
+      - TYK_DB_STORAGE_MAIN_TYPE=mongo
+      - TYK_DB_STORAGE_MAIN_CONNECTIONSTRING=mongodb://tyk-mongo:27017/tyk_analytics
+    env_file:
+      - ./conf/tyk/tyk_analytics.env
+    volumes:
+      - ./data-transfer:/data-transfer
+    restart: unless-stopped
+  tyk-mongo:
+    image: mongo:4.0
+    container_name: tyk-mongo
+    hostname: tyk-mongo
+    labels:
+      com.platys.name: mongo
+    ports:
+      - 27020:27017
+    volumes:
+      - ./data-transfer:/data-transfer
+    command: [mongod, --smallfiles]
+    restart: unless-stopped
   #  ================================== Minio ========================================== #
   minio-1:
     image: minio/minio:RELEASE.2022-08-08T18-34-09Z

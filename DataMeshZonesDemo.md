@@ -1,6 +1,22 @@
+# Data Mesh PoC using adapted Data Lake Zone Model
+
+This demo concentrates on showing the concept of providing Data Products of a Data Mesh using the adapted Data Lake Zone model. 
+
+* A database table or view
+* raw unstructured files, e.g. videos, images, ...
+* data stream of action events
+* data stream of state change events
+* table format
+* REST API
+* GraphQL API 
+* Virtual Data Set
+
 ## Initialize Platform
 
 ```bash
+git clone http://github.com/trivadispf/data-mesh-demo
+cd data-mesh-demo/docker
+
 docker-compose up -d
 ```
 
@@ -8,9 +24,9 @@ docker-compose up -d
 
 ### Minio (S3)
 
-```bash
-docker exec -ti awscli s3cmd mb s3://flight-bucket
+A bucket named `flight-data` has been created while initializing the platform. No let's copy some data into this bucket.
 
+```bash
 docker exec -ti awscli s3cmd put /data-transfer/flight-data/airports.csv s3://flight-bucket/raw/airports/airports.csv
 
 docker exec -ti awscli s3cmd put /data-transfer/flight-data/plane-data.csv s3://flight-bucket/raw/planes/plane-data.csv
@@ -29,73 +45,15 @@ docker exec -ti awscli s3cmd put /data-transfer/flight-data/flights-small/flight
 `V42FCGRVMK24JJ8DHUYG` and `bKhWxVF3kQoLY9kFmt91l+tDrEoZjqnWXzY9Eza`
 
 
-### PostgreSQL
+## Building Materialized Data Product (Batch)
 
-```bash
-docker exec -ti postgresql psql -d postgres -U postgres
-```
+In this section we will demonstrate how to build a materialized data product using Spark and Minio (S3).
 
-```sql
-CREATE SCHEMA mdm;
+![Materialized DP](./images/materialized-dp.png)
 
-DROP TABLE IF EXISTS mdm.airport_t;
+You can find the implementation in the Zeppelin notebook available in `zeppelin/data-mesh-zone-model.zpln`. Import it into Zeppelin available under <http://dataplatform:28080> (login as admin/changeme).
 
-CREATE TABLE mdm.airport_t
-(
-  iata character varying(50) NOT NULL,
-  airport character varying(50),
-  city character varying(50),
-  state character varying(50),
-  country character varying(50),
-  lat float,
-  long float,
-  CONSTRAINT airport_pk PRIMARY KEY (iata)
-);
-
-
-COPY mdm.airport_t(iata,airport,city,state,country,lat,long) 
-FROM '/data-transfer/flight-data/airports.csv' DELIMITER ',' CSV HEADER;
-```
-
-
-```
-create table postgresql.operations.flight_t 
-AS SELECT 
-    year ,
-    month ,
-    day_of_month ,
-    day_of_week ,
-    departure_time AS dep_time ,
-    scheduled_departure_time AS sched_dep_time ,
-    arrival_time AS arr_time ,
-    scheduled_arrival_time AS sched_arr_time ,
-    unique_carrier  ,
-    flight_number  ,
-    tail_number  ,
-    actual_elapsed_time AS act_elapsed_time ,
-    estimated_elapsed_time AS est_elapsed_time ,
-    airtime ,
-    arrival_delay AS arr_delay ,
-    departure_delay AS dep_delay ,
-    origin_airport_iata AS orig_airport  ,
-    destination_airport_iata AS dest_airport  ,
-    distance AS dist ,
-    taxi_in ,
-    taxi_out ,
-    cancelled ,
-    cancellation_code AS cancellation_cd  ,
-    diverted  ,
-    carrier_delay ,
-    weather_delay ,
-    nas_delay ,
-    security_delay ,
-    late_aircraft_delay  
-FROM int_flight_t;
-```
-
-## Materialized
-
-### Airport Domain
+### Master Data Mgmt (MDM) Domain
 
 #### Raw Zone
 
@@ -104,29 +62,29 @@ FROM int_flight_t;
 CREATE TABLE raw_airport_t
 USING CSV
 OPTIONS (sep=",", inferSchema="true", header="true")
-LOCATION "s3a://flight-bucket/raw/airports"
+LOCATION "s3a://flight-bucket/raw/airports
 ```
 
-#### Integration Zone
+#### Refined Zone
 
 
 ```scala
-val airportIntDf = spark.sql("""
-		SELECT a.iata
-		,      a.airport
-		,      a.city
-		,      a.state
-		,      a.country
-		,      a.lat         AS latitude
-		,      a.long        AS longitude
-		FROM raw_airport_t  a;
+val airportRefDf = spark.sql("""
+	SELECT a.iata
+	,      a.airport
+	,      a.city
+	,      a.state
+	,      a.country
+	,      a.lat         AS latitude
+	,      a.long        AS longitude
+	FROM raw_airport_t  a;
 """)
 ```
 
 ```scala
-airportIntDf.write.parquet("s3a://flight-bucket/integration/airports")
+airportRefDf.write.parquet("s3a://flight-bucket/refined/airports")
 
-airportIntDf.createOrReplaceTempView("int_airport_t")
+airportRefDf.createOrReplaceTempView("ref_airport_t")
 ```
 
 #### Data Product Zone
@@ -140,7 +98,7 @@ val airportDpDf = spark.sql("""
     ,      a.country
     ,      a.latitude
     ,      a.longitude
-    FROM int_airport_t  a;
+    FROM ref_airport_t  a;
 """)
 ```
 
@@ -150,19 +108,32 @@ airportDpDf.write.parquet("s3a://flight-bucket/dp/v1/airports")
 airportDpDf.createOrReplaceTempView("dp_airport_v1_t")
 ```
 
-### Carriers Domain
+Let's register the data product as a Hive table (so it is available in Trino)
 
-#### Raw Zone
+Connect to Hive-Metastore and create the `flight_db` database:
 
-```sql
-DROP TABLE raw_carriers_t;
+```
+docker exec -ti hive-metastore hive
 
-CREATE TABLE raw_carriers_t
-USING JSON
-LOCATION "s3a://flight-bucket/raw/carriers"
+CREATE DATABASE mdm_db;
+USE mdm_db;
 ```
 
-### Flights Domain
+and create the following table
+
+```
+CREATE EXTERNAL TABLE dp_airport_v1_t ( iata string
+                             , airport string
+                             , city string
+                             , state string
+                             , country string
+                             , latitude double
+                             , longitude double)
+STORED AS parquet
+LOCATION 's3a://flight-bucket/dp/v1/airports';
+```
+
+### Operations Domain
 
 #### Raw Zone
 
@@ -173,10 +144,10 @@ OPTIONS (sep=",", inferSchema="true", header="false")
 LOCATION "s3a://flight-bucket/raw/flights"
 ```
 
-#### Integration Zone
+#### Refined Zone
 
 ```scala
-val fligthIntDf = spark.sql("""
+val fligthRefDf = spark.sql("""
 		SELECT INT (_c0)    AS year
 		,   INT(_c1)        AS month
 		,   INT(_c2)        AS day_of_month
@@ -217,23 +188,23 @@ val fligthIntDf = spark.sql("""
 ```
 
 ```scala
-fligthIntDf.write.parquet("s3a://flight-bucket/integration/flights")
+fligthRefDf.write.parquet("s3a://flight-bucket/refined/flights")
 
-fligthIntDf.createOrReplaceTempView("int_flight_t")
+fligthRefDf.createOrReplaceTempView("ref_flight_t")
 ```
 
-#### Refined Zone
+#### Usage Optimized Zone
 
 ##### Flight Enriched
 
 ```scala
-val flightRefinedDf = spark.sql("""
+val flightUsageOptDf = spark.sql("""
 		SELECT f.*
 		,      orig.airport          AS origin_airport
 		,      orig.city             AS origin_city
 		,      dest.airport          AS destination_airport
 		,      dest.city             AS destination_city
-		FROM int_flight_t    f
+		FROM ref_flight_t    f
 		LEFT JOIN dp_airport_v1_t     orig
 		    ON (f.origin_airport_iata = orig.iata)
 		LEFT JOIN dp_airport_v1_t     dest
@@ -242,15 +213,15 @@ val flightRefinedDf = spark.sql("""
 ```
 
 ```scala
-flightRefinedDf.write.parquet("s3a://flight-bucket/refined/flights")
+flightUsageOptDf.write.parquet("s3a://flight-bucket/usageopt/flights")
 
-flightRefinedDf.createOrReplaceTempView("ref_flight_t")
+flightUsageOptDf.createOrReplaceTempView("usageopt_flight_t")
 ```
 
 ##### Flight Delays
 
 ```
-val flightDelayRefinedDf = spark.sql("""
+val flightDelayUsageOptDf = spark.sql("""
 		SELECT arrival_delay, origin_airport_iata, destination_airport_iata,
 		    CASE
 		         WHEN arrival_delay > 360 THEN 'Very Long Delays'
@@ -260,15 +231,15 @@ val flightDelayRefinedDf = spark.sql("""
 		         WHEN arrival_delay = 0 THEN 'No Delays'
 		         ELSE 'Early'
 		    END AS flight_delays
-		         FROM int_flight_t
+		         FROM ref_flight_t
 		         ORDER BY arrival_delay DESC
 """)
 ```
 
 ```scala
-flightDelayRefinedDf.write.parquet("s3a://flight-bucket/refined/flight_delays")
+flightDelayUsageOptDf.write.parquet("s3a://flight-bucket/usageopt/flight_delays")
 
-flightDelayRefinedDf.createOrReplaceTempView("ref_flight_delay_t")
+flightDelayUsageOptDf.createOrReplaceTempView("usageopt_flight_delay_t")
 ```
 
 #### Data Product Zone
@@ -294,7 +265,11 @@ val flightDpDf = spark.sql("""
 		,   f.arrival_delay
 		,   f.departure_delay
 		,   f.origin_airport_iata
+		,   f.origin_airport
+		,   f.origin_city
 		,   f.destination_airport_iata
+		,   f.destination_airport
+		,   f.destination_city
 		,   f.distance
 		,   f.taxi_in
 		,   f.taxi_out
@@ -307,7 +282,7 @@ val flightDpDf = spark.sql("""
 		,   f.nas_delay
 		,   f.security_delay
 		,   f.late_aircraft_delay
-		FROM ref_flight_t    f
+		FROM usageopt_flight_t    f
 """)
 ```
 
@@ -325,7 +300,7 @@ val flightDelayDpDf = spark.sql("""
 		,   fd.origin_airport_iata
 		,   fd.destination_airport_iata
 		,   fd.flight_delays
-		FROM ref_flight_delay_t    fd
+		FROM usageopt_flight_t    fd
 """)
 ```
 
@@ -335,45 +310,85 @@ flightDelayDpDf.write.parquet("s3a://flight-bucket/dp/v1/flight_delays")
 flightDelayDpDf.createOrReplaceTempView("dp_flight_delays_v1_t")
 ```
 
-## Virtualized (Partial)
+Let's register the data product as a Hive table (so it is available in Trino)
+
+Connect to Hive-Metastore and create the `operations_db ` database:
 
 ```
 docker exec -ti hive-metastore hive
+CREATE DATABASE operations_db;
+USE operations_db;
 ```
 
-```
-CREATE DATABASE flight_db;
-USE flight_db;
-```
-
-### Airport Domain
-
-#### Data Product Zone
-
-Create a Hive table on the `S3` objects in the Data Product Zone
+and create the following tables
 
 ```sql
-DROP TABLE dp_airport_v1_t;
-CREATE EXTERNAL TABLE dp_airport_v1_t ( iata string
-                             , airport string
-                             , city string
-                             , state string
-                             , country string
-                             , latitude double
-                             , longitude double)
+CREATE EXTERNAL TABLE dp_flight_v1_t ( year integer
+                            , month integer
+                            , day_of_month integer
+                            , day_of_week integer
+                            , departure_time integer
+                            , scheduled_departure_time integer
+                            , arrival_time integer
+                            , scheduled_arrival_time integer
+                            , unique_carrier string
+                            , flight_number string
+                            , tail_number string
+                            , actual_elapsed_time integer
+                            , estimated_elapsed_time integer
+                            , airtime integer
+                            , arrival_delay integer
+                            , departure_delay integer
+                            , origin_airport_iata string
+                            , origin_airport string
+                            , origin_city string
+                            , destination_airport_iata string
+                            , destination_airport string
+                            , destination_city string
+                            , distance integer
+                            , taxi_in integer
+                            , taxi_out integer
+                            , cancelled integer
+                            , cancellation_code string
+                            , cancellation_reason string
+                            , diverted string
+                            , carrier_delay integer
+                            , weather_delay integer
+                            , nas_delay integer
+                            , security_delay integer
+                            , late_aircraft_delay integer)
 STORED AS parquet
-LOCATION 's3a://flight-bucket/dp/v1/airports';
+LOCATION 's3a://flight-bucket/dp/v1/flights';
+
+CREATE EXTERNAL TABLE dp_flight_delays_v1_t ( arrival_delay integer
+                             , origin_airport_iata string
+                             , destination_airport_iata string
+                             , flight_delays string)
+STORED AS parquet
+LOCATION 's3a://flight-bucket/dp/v1/flight_delays';
 ```
 
-### Flight Domain
+## Virtualized (Partial) Data Product
 
-#### Integration Zone
+In this section we will demonstrate how to build a parially virtualized data product using Trino on the data prepared in the previous section when materializing the data product. The idea here is to deliver the same data product but in virtualized manner (on-demand) instead of being materialized upfront. 
 
-Create a Hive table on the `S3` objects in the Integration Zone
+![](./images/virtualized-partial-dp.png)
+
+### Master Data Mgmt (MDM) Domain
+
+For this example we are using the materialized data product which has been created and registered as a hive table above. 
+
+### Operation Domain
+
+#### Refined Zone
+
+Create a Hive table on the `S3` objects in the Refined Zone Zone:
 
 ```sql
-DROP TABLE int_flight_t;
-CREATE EXTERNAL TABLE int_flight_t ( year integer
+USE operations_db;
+
+DROP TABLE IF EXISTS ref_flight_t;
+CREATE EXTERNAL TABLE ref_flight_t ( year integer
 											, month integer
 											, day_of_month integer
 											, day_of_week integer
@@ -404,10 +419,10 @@ CREATE EXTERNAL TABLE int_flight_t ( year integer
 											, security_delay integer
 											, late_aircraft_delay integer)
 STORED AS parquet
-LOCATION 's3a://flight-bucket/integration/flights';
+LOCATION 's3a://flight-bucket/refined/flights';
 ```
 
-#### Refined Zone
+#### Usage Optimized Zone
 
 ##### Flight Enriched
 
@@ -416,28 +431,28 @@ docker exec -it trino-cli trino --server trino-1:8080
 ```
 
 ```bash
-use minio.flight_db;
+use minio.operations_db;
 ```
 
 ```sql
-CREATE VIEW ref_flight
+CREATE VIEW usageopt_flight_v
 AS 
 SELECT f.*
 ,      orig.airport          AS origin_airport
 ,      orig.city             AS origin_city
 ,      dest.airport          AS destination_airport
 ,      dest.city             AS destination_city
-FROM int_flight_t    f
-LEFT JOIN dp_airport_v1_t     orig
+FROM ref_flight_t    f
+LEFT JOIN mdm_db.dp_airport_v1_t     orig
     ON (f.origin_airport_iata = orig.iata)
-LEFT JOIN dp_airport_v1_t     dest
+LEFT JOIN mdm_db.dp_airport_v1_t     dest
     ON (f.destination_airport_iata = dest.iata);
 ```
 
 ##### Flight Delays
 
 ```sql
-CREATE VIEW ref_flight_delays
+CREATE VIEW usageopt_flight_delays_v
 AS 
 SELECT arrival_delay, origin_airport_iata, destination_airport_iata,
     CASE
@@ -448,8 +463,8 @@ SELECT arrival_delay, origin_airport_iata, destination_airport_iata,
          WHEN arrival_delay = 0 THEN 'No Delays'
          ELSE 'Early'
     END AS flight_delays
-         FROM int_flight_t
-         ORDER BY arrival_delay DESC;
+FROM ref_flight_t
+ORDER BY arrival_delay DESC;
 ```
 
 #### Data Product Zone
@@ -457,7 +472,7 @@ SELECT arrival_delay, origin_airport_iata, destination_airport_iata,
 ##### Flight Enriched
 
 ```sql
-CREATE VIEW dp_flight_v1
+CREATE VIEW dp_flight_v1_v
 AS
 SELECT f.year
 ,   f.month
@@ -476,7 +491,11 @@ SELECT f.year
 ,   f.arrival_delay
 ,   f.departure_delay
 ,   f.origin_airport_iata
+,   f.origin_airport
+,   f.origin_city
 ,   f.destination_airport_iata
+,   f.destination_airport
+,   f.destination_city
 ,   f.distance
 ,   f.taxi_in
 ,   f.taxi_out
@@ -489,7 +508,7 @@ SELECT f.year
 ,   f.nas_delay
 ,   f.security_delay
 ,   f.late_aircraft_delay
-FROM ref_flight  f;
+FROM usageopt_flight_v  f;
 ```
 
 ##### Flight Delays
@@ -501,23 +520,34 @@ SELECT fd.arrival_delay
 ,   fd.origin_airport_iata
 ,   fd.destination_airport_iata
 ,   fd.flight_delays
-FROM ref_flight_delays fd;
+FROM usageopt_flight_delays_v fd;
 ```
 
-## Virtualized (Full)
+## Virtualized (Full) Data Product
 
-### Airport Domain
+In this section we will demonstrate how to build a fully virtualized data product using Trino. 
+
+![](./images/virtualized-full-dp.png)
+
+```bash
+docker exec -ti hive-metastore hive
+CREATE DATABASE mdm_vdb;
+CREATE DATABASE operations_vdb;
+```
+
+### Master Data Mgmt (MDM) Domain
 
 ```bash
 docker exec -it trino-cli trino --server trino-1:8080
 ```
 
-#### Integration Zone
+#### Refined Zone
 
 ```sql
-use minio.flight_db;
+use minio.mdm_vdb;
 
-CREATE VIEW int_airport_t
+DROP VIEW IF EXISTS ref_airport_v;
+CREATE VIEW ref_airport_v
 AS
 SELECT a.iata
 ,      a.airport
@@ -533,6 +563,7 @@ FROM postgresql.mdm.airport_t  a;
 
 ```sql
 DROP VIEW IF EXISTS dp_airport_v1_v;
+
 CREATE VIEW dp_airport_v1_v
 AS
 SELECT a.iata
@@ -542,45 +573,241 @@ SELECT a.iata
 ,      a.country
 ,      a.latitude
 ,      a.longitude
-FROM int_airport_t  a;
+FROM ref_airport_v  a;
 ```
 
-### Flight Domain
+### Operations Domain
 
 ```bash
 docker exec -it trino-cli trino --server trino-1:8080
 ```
 
-#### Integration Zone
+#### Refined Zone
 
 ```sql
-use minio.flight_db;
+use minio.operations_vdb;
 
-CREATE VIEW int_flight_t
+CREATE VIEW ref_flight_v
 AS
-SELECT year
-,	month
-,  day_of_month
-, 	day_of_week
-,  departure_time
-,  scheduled_departure_time
-,  arr_time	AS arrival_time
-
+SELECT 
+    year ,
+    month ,
+    day_of_month ,
+    day_of_week ,
+    dep_time  			AS departure_time,
+    sched_dep_time 		AS scheduled_departure_time,
+    arr_time 				AS arrival_time,
+    sched_arr_time 		AS scheduled_arrival_time,
+    unique_carrier,
+    flight_number,
+    tail_number,
+    act_elapsed_time  	AS actual_elapsed_time,
+    est_elapsed_time 	AS estimated_elapsed_time,
+    airtime,
+    arr_delay 			AS arrival_delay,
+    dep_delay 			AS departure_delay,
+    orig_airport 		AS origin_airport_iata,
+    dest_airport 		AS destination_airport_iata,
+    dist 					AS distance,
+    taxi_in,
+    taxi_out,
+    cancelled,
+    cancellation_cd 	AS cancellation_code,
+	 CASE 
+		         WHEN cancellation_cd = 'A' THEN 'carrier'
+		         WHEN cancellation_cd = 'B' THEN 'weather'
+		         WHEN cancellation_cd = 'C' THEN 'NAS'
+		         WHEN cancellation_cd = 'D' THEN 'security'
+    END             	AS cancellation_reason,    
+    diverted,
+    carrier_delay,
+    weather_delay,
+    nas_delay,
+    security_delay,
+    late_aircraft_delay  
 FROM postgresql.operations.flight_t  f;
+```
+
+#### Usage Optimized Zone
+
+##### Flight Enriched
+
+```bash
+docker exec -it trino-cli trino --server trino-1:8080
+```
+
+```bash
+use minio.operations_vdb;
+```
+
+```sql
+CREATE VIEW usageopt_flight_v
+AS 
+SELECT f.*
+,      orig.airport          AS origin_airport
+,      orig.city             AS origin_city
+,      dest.airport          AS destination_airport
+,      dest.city             AS destination_city
+FROM ref_flight_v   f
+LEFT JOIN mdm_vdb.dp_airport_v1_v     orig
+    ON (f.origin_airport_iata = orig.iata)
+LEFT JOIN mdm_vdb.dp_airport_v1_v     dest
+    ON (f.destination_airport_iata = dest.iata);
+```
+
+##### Flight Delays
+
+```sql
+CREATE VIEW usageopt_flight_delays_v
+AS 
+SELECT arrival_delay, origin_airport_iata, destination_airport_iata,
+    CASE
+         WHEN arrival_delay > 360 THEN 'Very Long Delays'
+         WHEN arrival_delay > 120 AND arrival_delay < 360 THEN 'Long Delays'
+         WHEN arrival_delay > 60 AND arrival_delay < 120 THEN 'Short Delays'
+         WHEN arrival_delay > 0 and arrival_delay < 60 THEN 'Tolerable Delays'
+         WHEN arrival_delay = 0 THEN 'No Delays'
+         ELSE 'Early'
+    END AS flight_delays
+         FROM ref_flight_v
+         ORDER BY arrival_delay DESC;
 ```
 
 #### Data Product Zone
 
+##### Flight Enriched
+
 ```sql
-DROP VIEW IF EXISTS dp_airport_v1_v;
-CREATE VIEW dp_airport_v1_v
+CREATE OR REPLACE VIEW dp_flight_v1
 AS
-SELECT a.iata
-,      a.airport
-,      a.city
-,      a.state
-,      a.country
-,      a.latitude
-,      a.longitude
-FROM int_airport_t  a;
+SELECT f.year
+,   f.month
+,   f.day_of_month
+,   f.day_of_week
+,   f.departure_time
+,   f.scheduled_departure_time
+,   f.arrival_time
+,   f.scheduled_arrival_time
+,   f.unique_carrier
+,   f.flight_number
+,   f.tail_number
+,   f.actual_elapsed_time
+,   f.estimated_elapsed_time
+,   f.airtime
+,   f.arrival_delay
+,   f.departure_delay
+,   f.origin_airport_iata
+,   f.origin_airport
+,   f.origin_city
+,   f.destination_airport_iata
+,   f.destination_airport
+,   f.destination_city
+,   f.distance
+,   f.taxi_in
+,   f.taxi_out
+,   f.cancelled
+,   f.cancellation_code
+,   f.cancellation_reason
+,   f.diverted
+,   f.carrier_delay
+,   f.weather_delay
+,   f.nas_delay
+,   f.security_delay
+,   f.late_aircraft_delay
+FROM usageopt_flight_v  f;
 ```
+
+##### Flight Delays
+
+```sql
+CREATE OR REPLACE VIEW dp_flight_delays_v1
+AS
+SELECT fd.arrival_delay
+,   fd.origin_airport_iata
+,   fd.destination_airport_iata
+,   fd.flight_delays
+FROM usageopt_flight_delays_v fd;
+```
+
+## Rest API Data Product
+
+### Airport Domain
+
+<https://tyk.io/docs/tyk-gateway-api/api-definition-objects/>
+
+```bash
+curl -v -H "x-tyk-authorization: abc123!" \
+  -s \
+  -H "Content-Type: application/json" \
+  -X POST \
+  -d '{
+    "name": "Hello-World",
+    "slug": "hello-world",
+    "api_id": "Hello-World",
+    "org_id": "1",
+    "use_keyless": false,
+    "auth": {
+      "auth_header_name": "Authorization"
+    },
+    "definition": {
+      "location": "header",
+      "key": "x-api-version"
+    },
+    "version_data": {
+      "not_versioned": true,
+      "versions": {
+        "Default": {
+          "name": "Default",
+          "use_extended_paths": true
+        }
+      }
+    },
+    "proxy": {
+      "listen_path": "/airports",
+      "target_url": "http://data-mesh-demo-airport-api-1:8082/api/airports",
+      "strip_listen_path": true
+    },
+    "active": true,
+    "global_rate_limit": {
+    	"rate": 2,
+    	"per": 60
+  	 }
+}' http://dataplatform:28280/tyk/apis | jq
+```
+
+```
+curl -H "x-tyk-authorization: abc123!" -s http://dataplatform:28280/tyk/reload/group | jq
+```
+
+```bash
+curl -X POST -H "x-tyk-authorization: abc123!" \
+  -s \
+  -H "Content-Type: application/json" \
+  -X POST \
+  -d '{
+    "allowance": 1000,
+    "rate": 1000,
+    "per": 1,
+    "expires": -1,
+    "quota_max": -1,
+    "org_id": "1",
+    "quota_renews": 1449051461,
+    "quota_remaining": -1,
+    "quota_renewal_rate": 60,
+    "access_rights": {
+      "Hello-World": {
+        "api_id": "Hello-World",
+        "api_name": "Hello-World",
+        "versions": ["Default"]
+      }
+    },
+    "meta_data": {}
+  }' http://dataplatform:28280/tyk/keys/create | jq
+```
+
+```bash
+curl http://data-mesh-demo-airport-api-1:8082/api/airports/JFK
+```
+
+## GraphQL Data Product
+

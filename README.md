@@ -954,8 +954,7 @@ curl -H "Authorization: 1135d5a8518574998abf2357b4bcdca1b" http://dataplatform:2
 ```
 
 
-
 ## GraphQL Data Product
 
-<dataplatform:28177>
+<http://dataplatform:28177>
 

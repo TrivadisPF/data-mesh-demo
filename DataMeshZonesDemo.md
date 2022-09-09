@@ -2,14 +2,20 @@
 
 This demo concentrates on showing the concept of providing Data Products of a Data Mesh using the adapted Data Lake Zone model. 
 
-* A database table or view
+![](./images/overview.png)
+
+
+The following technologies will be shown as data products
+
+* a database table or view
 * raw unstructured files, e.g. videos, images, ...
 * data stream of action events
 * data stream of state change events
-* table format
-* REST API
-* GraphQL API 
-* Virtual Data Set
+* [done] table format
+* [done] REST API
+* [done] GraphQL API 
+* [done] Virtual Data Set
+* Visualizations and dashboards
 
 ## Initialize Platform
 
@@ -366,6 +372,20 @@ CREATE EXTERNAL TABLE dp_flight_delays_v1_t ( arrival_delay integer
                              , flight_delays string)
 STORED AS parquet
 LOCATION 's3a://flight-bucket/dp/v1/flight_delays';
+```
+
+#### Test usage of DP
+
+From Trino, do a select
+
+```bash
+docker exec -it trino-cli trino --server trino-1:8080
+
+use minio.operations_db;
+```
+
+```sql
+SELECT * FROM dp_flight_v1_t;
 ```
 
 ## Virtualized (Partial) Data Product
@@ -729,11 +749,25 @@ SELECT fd.arrival_delay
 FROM usageopt_flight_delays_v fd;
 ```
 
-## Rest API Data Product
+## Rest API driven Data Product
 
-### Airport Domain
+In this section we will demonstrate how to build a REST API driven data product using Spring Boot and Tyk API Gateway. 
+
+![](./images/api-dp.png)
+
+### Operations Domain
+
+A REST API on top of Operations DP is available
+
+```bash
+curl http://dataplatform:48082/dp/flightDelays/LAX | jq
+```
+
+We are using Tyk (<https://tyk.io/>) here but Kong would be supported by Platys as well. 
 
 <https://tyk.io/docs/tyk-gateway-api/api-definition-objects/>
+
+Add an API without authorization (keyless) to TYK API Gateway
 
 ```bash
 curl -v -H "x-tyk-authorization: abc123!" \
@@ -741,9 +775,59 @@ curl -v -H "x-tyk-authorization: abc123!" \
   -H "Content-Type: application/json" \
   -X POST \
   -d '{
-    "name": "Hello-World",
-    "slug": "hello-world",
-    "api_id": "Hello-World",
+    "name": "Operations Data Product",
+    "slug": "operations-dp",
+    "api_id": "operations-dp",
+    "org_id": "1",
+    "use_keyless": true,
+    "auth": {
+      "auth_header_name": "Authorization"
+    },
+    "definition": {
+      "location": "header",
+      "key": "x-api-version"
+    },
+    "version_data": {
+      "not_versioned": true,
+      "versions": {
+        "Default": {
+          "name": "Default",
+          "use_extended_paths": true
+        }
+      }
+    },
+    "proxy": {
+      "listen_path": "/operations",
+      "target_url": "http://data-mesh-poc-operations-db-api-1:8082/dp",
+      "strip_listen_path": true
+    },
+    "active": true
+}' http://dataplatform:28280/tyk/apis | jq
+```
+
+Reload Tyk API gateway
+
+```bash
+curl -H "x-tyk-authorization: abc123!" -s http://dataplatform:28280/tyk/reload/group | jq
+```
+
+```bash
+curl http://dataplatform:28280/operations/flightDelays/LAX | jq
+
+curl http://dataplatform:28280/operations/flights/LAX | jq
+```
+
+Add authorization (`keyless`: false)
+
+```bash
+curl -v -H "x-tyk-authorization: abc123!" \
+  -s \
+  -H "Content-Type: application/json" \
+  -X POST \
+  -d '{
+    "name": "Operations Data Product",
+    "slug": "operations-dp",
+    "api_id": "operations-dp",
     "org_id": "1",
     "use_keyless": false,
     "auth": {
@@ -763,23 +847,17 @@ curl -v -H "x-tyk-authorization: abc123!" \
       }
     },
     "proxy": {
-      "listen_path": "/airports",
-      "target_url": "http://data-mesh-demo-airport-api-1:8082/api/airports",
+      "listen_path": "/operations",
+      "target_url": "http://data-mesh-poc-operations-db-api-1:8082/dp",
       "strip_listen_path": true
     },
-    "active": true,
-    "global_rate_limit": {
-    	"rate": 2,
-    	"per": 60
-  	 }
+    "active": true
 }' http://dataplatform:28280/tyk/apis | jq
 ```
 
-```
-curl -H "x-tyk-authorization: abc123!" -s http://dataplatform:28280/tyk/reload/group | jq
-```
+Create an API Key
 
-```bash
+```
 curl -X POST -H "x-tyk-authorization: abc123!" \
   -s \
   -H "Content-Type: application/json" \
@@ -795,9 +873,9 @@ curl -X POST -H "x-tyk-authorization: abc123!" \
     "quota_remaining": -1,
     "quota_renewal_rate": 60,
     "access_rights": {
-      "Hello-World": {
-        "api_id": "Hello-World",
-        "api_name": "Hello-World",
+      "operations-dp": {
+        "api_id": "operations-dp",
+        "api_name": "Operations Data Product",
         "versions": ["Default"]
       }
     },
@@ -805,9 +883,79 @@ curl -X POST -H "x-tyk-authorization: abc123!" \
   }' http://dataplatform:28280/tyk/keys/create | jq
 ```
 
+Reload Tyk API gateway
+
 ```bash
-curl http://data-mesh-demo-airport-api-1:8082/api/airports/JFK
+curl -H "x-tyk-authorization: abc123!" -s http://dataplatform:28280/tyk/reload/group | jq
 ```
 
+Now the API will no longer work without using the `Authorization` header:
+
+```bash
+curl http://dataplatform:28280/operations/flights/LAX | jq
+```
+
+```bash
+curl -H "Authorization: 1135d5a8518574998abf2357b4bcdca1b" http://dataplatform:28280/operations/flights/LAX | jq
+```
+
+Add throtling
+
+```bash
+curl -v -H "x-tyk-authorization: abc123!" \
+  -s \
+  -H "Content-Type: application/json" \
+  -X POST \
+  -d '{
+    "name": "Operations Data Product",
+    "slug": "operations-dp",
+    "api_id": "operations-dp",
+    "org_id": "1",
+    "use_keyless": false,
+    "auth": {
+      "auth_header_name": "Authorization"
+    },
+    "definition": {
+      "location": "header",
+      "key": "x-api-version"
+    },
+    "version_data": {
+      "not_versioned": true,
+      "versions": {
+        "Default": {
+          "name": "Default",
+          "use_extended_paths": true
+        }
+      }
+    },
+    "proxy": {
+      "listen_path": "/operations",
+      "target_url": "http://data-mesh-poc-operations-db-api-1:8082/dp",
+      "strip_listen_path": true
+    },
+    "active": true,
+    "global_rate_limit": {
+       "rate": 5,
+       "per": 60
+    }
+}' http://dataplatform:28280/tyk/apis | jq
+```
+
+Reload Tyk API gateway
+
+```bash
+curl -H "x-tyk-authorization: abc123!" -s http://dataplatform:28280/tyk/reload/group | jq
+```
+
+Execute the statement more than 5 times to show the throttling
+
+```bash
+curl -H "Authorization: 1135d5a8518574998abf2357b4bcdca1b" http://dataplatform:28280/operations/flightDelays/LAX | jq
+```
+
+
+
 ## GraphQL Data Product
+
+<dataplatform:28177>
 

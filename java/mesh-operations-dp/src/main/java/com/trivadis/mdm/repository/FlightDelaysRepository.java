@@ -16,6 +16,6 @@ public interface FlightDelaysRepository {
             @Result(property = "destinationAirportIata", column = "destination_airport_iata"),
             @Result(property = "flightDelays", column = "flight_delays"),
     })
-    List<FlightDelays> findByOriginAirport(@Param("iata") String iata);
+    List<FlightDelays> findDelaysByOriginAirport(@Param("iata") String iata);
     
 }

@@ -4,6 +4,7 @@ import com.trivadis.mdm.entity.Flight;
 import com.trivadis.mdm.entity.FlightDelays;
 import com.trivadis.mdm.entity.FlightDelaysDTO;
 import com.trivadis.mdm.repository.FlightDelaysRepository;
+import com.trivadis.mdm.service.FlightDelaysService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -22,15 +23,15 @@ public class FlightDelaysController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FlightDelaysController.class);
 
-    private final FlightDelaysRepository flightDelaysRepository;
+    private final FlightDelaysService flightDelaysService;
 
-    public FlightDelaysController(FlightDelaysRepository flightDelaysRepository) {
-        this.flightDelaysRepository = flightDelaysRepository;
+    public FlightDelaysController(FlightDelaysService flightDelaysService) {
+        this.flightDelaysService = flightDelaysService;
     }
 
     @GetMapping("{originAirportIata}")
     public ResponseEntity<List<FlightDelaysDTO>> getAirportByIata(@PathVariable String originAirportIata) {
-        List<FlightDelays> flightDelays = flightDelaysRepository.findByOriginAirport(originAirportIata);
+        List<FlightDelays> flightDelays = flightDelaysService.getFlightDelays(originAirportIata);
 
         List<FlightDelaysDTO> dtos = new ArrayList<>();
         for (FlightDelays flightDelay : flightDelays) {

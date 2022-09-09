@@ -27,7 +27,7 @@ public class FlightService {
      * @return The flight if exists
      */
     public List<Flight> getFlights(String originAirportIata) {
-        LOGGER.info("getFlight({})", originAirportIata);
+        LOGGER.info("getFlights({})", originAirportIata);
 
         return flightRepository.findByOriginAirport(originAirportIata);
     }

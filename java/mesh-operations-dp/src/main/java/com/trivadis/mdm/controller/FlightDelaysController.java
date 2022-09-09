@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/flightDelays")
+@RequestMapping("/dp/flightDelays")
 public class FlightDelaysController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FlightDelaysController.class);

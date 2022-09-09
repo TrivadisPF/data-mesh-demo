@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/flights")
+@RequestMapping("/dp/flights")
 public class FlightController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FlightController.class);

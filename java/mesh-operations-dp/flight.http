@@ -1,2 +1,2 @@
-GET localhost:8082/api/flights/LAX
+GET localhost:8082/dp/flights/LAX
 

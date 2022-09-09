@@ -16,7 +16,7 @@ services:
     hostname: data-mesh-poc-operations-db-api-1
     container_name: data-mesh-poc-operations-db-api-1
     labels:
-      com.platys.restapi.title: 'data-mesh-demo-airport-api-1'
+      com.platys.restapi.title: 'data-mesh-poc-operations-db-api-1'
       com.platys.restapi.url: "http://${PUBLIC_IP}:48082"
     ports:
       - "48082:8082"

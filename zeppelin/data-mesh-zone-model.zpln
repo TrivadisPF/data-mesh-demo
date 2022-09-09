@@ -1,9 +1,9 @@
 ﻿{
   "paragraphs": [
     {
-      "text": "%md\n## Airports\n",
+      "text": "%md\n## Master Data Mgmt (MDM) Domain\n",
       "user": "admin",
-      "dateUpdated": "2022-08-31T07:18:01+0000",
+      "dateUpdated": "2022-09-08T21:22:26+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -29,26 +29,26 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<div class=\"markdown-body\">\n<h2>Airports</h2>\n\n</div>"
+            "data": "<div class=\"markdown-body\">\n<h2>Master Data Mgmt (MDM) Domain</h2>\n\n</div>"
           }
         ]
       },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661930269489_1967960180",
+      "jobName": "paragraph_1662637236108_2116062141",
       "id": "paragraph_1661930269489_1967960180",
-      "dateCreated": "2022-08-31T07:17:49+0000",
-      "dateStarted": "2022-08-31T07:18:01+0000",
-      "dateFinished": "2022-08-31T07:18:04+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T21:22:26+0000",
+      "dateFinished": "2022-09-08T21:22:26+0000",
       "status": "FINISHED",
       "focus": true,
-      "$$hashKey": "object:210715"
+      "$$hashKey": "object:123905"
     },
     {
       "text": "%md\n### Raw (Source) Zone",
       "user": "admin",
-      "dateUpdated": "2022-08-31T07:42:37+0000",
+      "dateUpdated": "2022-09-08T11:44:06+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -81,18 +81,18 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661931195305_842805167",
+      "jobName": "paragraph_1662637236109_1706737946",
       "id": "paragraph_1661931195305_842805167",
-      "dateCreated": "2022-08-31T07:33:15+0000",
-      "dateStarted": "2022-08-31T07:42:37+0000",
-      "dateFinished": "2022-08-31T07:42:37+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T11:44:06+0000",
+      "dateFinished": "2022-09-08T11:44:06+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210716"
+      "$$hashKey": "object:123906"
     },
     {
       "text": "%sql\nCREATE TABLE raw_airport_t\nUSING CSV\nOPTIONS (sep=\",\", inferSchema=\"true\", header=\"true\")\nLOCATION \"s3a://flight-bucket/raw/airports\"",
       "user": "admin",
-      "dateUpdated": "2022-08-31T07:12:54+0000",
+      "dateUpdated": "2022-09-08T11:43:56+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -112,45 +112,32 @@
         "forms": {}
       },
       "results": {
-        "code": "SUCCESS",
-        "msg": []
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Table default.raw_airport_t already exists."
+          }
+        ]
       },
       "apps": [],
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            {
-              "jobUrl": "http://zeppelin:4050/jobs/job?id=0",
-              "$$hashKey": "object:211393"
-            },
-            {
-              "jobUrl": "http://zeppelin:4050/jobs/job?id=1",
-              "$$hashKey": "object:211394"
-            }
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661929970034_1351144540",
+      "jobName": "paragraph_1662637236109_757993518",
       "id": "paragraph_1661929970034_1351144540",
-      "dateCreated": "2022-08-31T07:12:50+0000",
-      "dateStarted": "2022-08-31T07:12:54+0000",
-      "dateFinished": "2022-08-31T07:13:45+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:210717"
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T11:43:56+0000",
+      "dateFinished": "2022-09-08T11:43:56+0000",
+      "status": "ERROR",
+      "$$hashKey": "object:123907"
     },
     {
-      "text": "%md\n### Integration Zone",
+      "text": "%md\n### Refined Zone",
       "user": "admin",
-      "dateUpdated": "2022-08-31T07:42:41+0000",
+      "dateUpdated": "2022-09-08T11:44:13+0000",
       "progress": 0,
       "config": {
-        "tableHide": false,
+        "tableHide": true,
         "editorSetting": {
           "language": "markdown",
           "editOnDblClick": true,
@@ -160,7 +147,7 @@
         "colWidth": 12,
         "editorMode": "ace/mode/markdown",
         "fontSize": 9,
-        "editorHide": true,
+        "editorHide": false,
         "results": {},
         "enabled": true
       },
@@ -180,18 +167,18 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661931213759_11250300",
+      "jobName": "paragraph_1662637236109_24069749",
       "id": "paragraph_1661931213759_11250300",
-      "dateCreated": "2022-08-31T07:33:33+0000",
-      "dateStarted": "2022-08-31T07:42:41+0000",
-      "dateFinished": "2022-08-31T07:42:41+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T11:43:59+0000",
+      "dateFinished": "2022-09-08T11:44:03+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210718"
+      "$$hashKey": "object:123908"
     },
     {
       "text": "%sql\nSELECT a.iata\n,      a.airport\n,      a.city\n,      a.state\n,      a.country\n,      a.lat         AS latitude\n,      a.long        AS longitude\nFROM raw_airport_t  a;",
       "user": "admin",
-      "dateUpdated": "2022-08-31T07:24:25+0000",
+      "dateUpdated": "2022-09-09T05:23:01+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -213,15 +200,7 @@
                 "table": {
                   "tableGridState": {},
                   "tableColumnTypeState": {
-                    "names": {
-                      "iata": "string",
-                      "airport": "string",
-                      "city": "string",
-                      "state": "string",
-                      "country": "string",
-                      "latitude": "string",
-                      "longitude": "string"
-                    },
+                    "names": {},
                     "updated": false
                   },
                   "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
@@ -266,27 +245,27 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://zeppelin:4050/jobs/job?id=11",
-              "$$hashKey": "object:211447"
+              "jobUrl": "http://zeppelin:4050/jobs/job?id=26",
+              "$$hashKey": "object:132333"
             }
           ],
           "interpreterSettingId": "spark"
         }
       },
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661930331456_39660560",
+      "jobName": "paragraph_1662637236109_257188493",
       "id": "paragraph_1661930331456_39660560",
-      "dateCreated": "2022-08-31T07:18:51+0000",
-      "dateStarted": "2022-08-31T07:24:24+0000",
-      "dateFinished": "2022-08-31T07:24:25+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-09T05:22:19+0000",
+      "dateFinished": "2022-09-09T05:23:03+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210719"
+      "$$hashKey": "object:123909"
     },
     {
-      "text": "val airportIntDf = spark.sql(\"\"\"\nSELECT a.iata\n,      a.airport\n,      a.city\n,      a.state\n,      a.country\n,      a.lat         AS latitude\n,      a.long        AS longitude\nFROM raw_airport_t  a;\n\"\"\")\n",
+      "text": "val airportRefDf = spark.sql(\"\"\"\nSELECT a.iata\n,      a.airport\n,      a.city\n,      a.state\n,      a.country\n,      a.lat         AS latitude\n,      a.long        AS longitude\nFROM raw_airport_t  a;\n\"\"\")\n",
       "user": "admin",
-      "dateUpdated": "2022-08-31T07:38:31+0000",
-      "progress": 100,
+      "dateUpdated": "2022-09-08T11:44:45+0000",
+      "progress": 0,
       "config": {
         "editorSetting": {
           "language": "scala",
@@ -309,26 +288,26 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\u001b[1m\u001b[34mairportIntDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [iata: string, airport: string ... 5 more fields]\n"
+            "data": "\u001b[1m\u001b[34mairportRefDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [iata: string, airport: string ... 5 more fields]\n"
           }
         ]
       },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661930684858_1388598072",
+      "jobName": "paragraph_1662637236110_1115920936",
       "id": "paragraph_1661930684858_1388598072",
-      "dateCreated": "2022-08-31T07:24:44+0000",
-      "dateStarted": "2022-08-31T07:38:31+0000",
-      "dateFinished": "2022-08-31T07:38:32+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T11:44:45+0000",
+      "dateFinished": "2022-09-08T11:44:46+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210720"
+      "$$hashKey": "object:123910"
     },
     {
-      "text": "airportIntDf.write.parquet(\"s3a://flight-bucket/integration/airports\")\n",
+      "text": "airportRefDf.write.parquet(\"s3a://flight-bucket/refined/airports\")\n",
       "user": "admin",
-      "dateUpdated": "2022-08-31T07:38:31+0000",
-      "progress": 0,
+      "dateUpdated": "2022-09-08T11:44:47+0000",
+      "progress": 100,
       "config": {
         "editorSetting": {
           "language": "scala",
@@ -346,19 +325,39 @@
         "params": {},
         "forms": {}
       },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
       "apps": [],
-      "runtimeInfos": {},
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://zeppelin:4050/jobs/job?id=3",
+              "$$hashKey": "object:124703"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661931509063_955393777",
+      "jobName": "paragraph_1662637236110_383556805",
       "id": "paragraph_1661931509063_955393777",
-      "dateCreated": "2022-08-31T07:38:29+0000",
-      "status": "READY",
-      "$$hashKey": "object:210721"
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T11:44:47+0000",
+      "dateFinished": "2022-09-08T11:44:54+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:123911"
     },
     {
-      "text": "airportIntDf.createOrReplaceTempView(\"int_airport_t\")",
+      "text": "airportRefDf.createOrReplaceTempView(\"ref_airport_t\")",
       "user": "admin",
-      "dateUpdated": "2022-08-31T07:38:37+0000",
+      "dateUpdated": "2022-09-08T11:44:56+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -384,18 +383,18 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661931289794_1178434051",
+      "jobName": "paragraph_1662637236110_276848260",
       "id": "paragraph_1661931289794_1178434051",
-      "dateCreated": "2022-08-31T07:34:49+0000",
-      "dateStarted": "2022-08-31T07:38:37+0000",
-      "dateFinished": "2022-08-31T07:38:37+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T11:44:56+0000",
+      "dateFinished": "2022-09-08T11:44:57+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210722"
+      "$$hashKey": "object:123912"
     },
     {
       "text": "%md\n### Data Product Zone (ACL)",
       "user": "admin",
-      "dateUpdated": "2022-08-31T10:32:38+0000",
+      "dateUpdated": "2022-09-08T11:40:36+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -428,18 +427,16 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661931236329_919424587",
+      "jobName": "paragraph_1662637236112_703085049",
       "id": "paragraph_1661931236329_919424587",
-      "dateCreated": "2022-08-31T07:33:56+0000",
-      "dateStarted": "2022-08-31T10:32:38+0000",
-      "dateFinished": "2022-08-31T10:32:38+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:210723"
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "status": "READY",
+      "$$hashKey": "object:123913"
     },
     {
-      "text": "%sql\nSELECT a.iata\n,      a.airport\n,      a.city\n,      a.state\n,      a.country\n,      a.latitude\n,      a.longitude\nFROM int_airport_t  a;",
+      "text": "%sql\nSELECT a.iata\n,      a.airport\n,      a.city\n,      a.state\n,      a.country\n,      a.latitude\n,      a.longitude\nFROM ref_airport_t  a;",
       "user": "admin",
-      "dateUpdated": "2022-08-31T07:36:05+0000",
+      "dateUpdated": "2022-09-08T11:45:03+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -516,26 +513,26 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://zeppelin:4050/jobs/job?id=13",
-              "$$hashKey": "object:211530"
+              "jobUrl": "http://zeppelin:4050/jobs/job?id=4",
+              "$$hashKey": "object:124763"
             }
           ],
           "interpreterSettingId": "spark"
         }
       },
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661931261000_341120153",
+      "jobName": "paragraph_1662637236112_1534478966",
       "id": "paragraph_1661931261000_341120153",
-      "dateCreated": "2022-08-31T07:34:21+0000",
-      "dateStarted": "2022-08-31T07:36:04+0000",
-      "dateFinished": "2022-08-31T07:36:04+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T11:45:03+0000",
+      "dateFinished": "2022-09-08T11:45:04+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210724"
+      "$$hashKey": "object:123914"
     },
     {
-      "text": "val airportDpDf = spark.sql(\"\"\"\n    SELECT a.iata\n    ,      a.airport\n    ,      a.city\n    ,      a.state\n    ,      a.country\n    ,      a.latitude\n    ,      a.longitude\n    FROM int_airport_t  a;\n\"\"\")\n",
+      "text": "val airportDpDf = spark.sql(\"\"\"\n    SELECT a.iata\n    ,      a.airport\n    ,      a.city\n    ,      a.state\n    ,      a.country\n    ,      a.latitude\n    ,      a.longitude\n    FROM ref_airport_t  a;\n\"\"\")\n",
       "user": "admin",
-      "dateUpdated": "2022-08-31T10:32:34+0000",
+      "dateUpdated": "2022-09-08T11:45:15+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -559,25 +556,25 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\u001b[1m\u001b[34mairportAclDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [iata: string, airport: string ... 5 more fields]\n"
+            "data": "\u001b[1m\u001b[34mairportDpDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [iata: string, airport: string ... 5 more fields]\n"
           }
         ]
       },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661931369662_118754118",
+      "jobName": "paragraph_1662637236113_1749810079",
       "id": "paragraph_1661931369662_118754118",
-      "dateCreated": "2022-08-31T07:36:09+0000",
-      "dateStarted": "2022-08-31T07:37:32+0000",
-      "dateFinished": "2022-08-31T07:37:32+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T11:45:15+0000",
+      "dateFinished": "2022-09-08T11:45:15+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210725"
+      "$$hashKey": "object:123915"
     },
     {
       "text": "airportDpDf.write.parquet(\"s3a://flight-bucket/dp/v1/airports\")",
       "user": "admin",
-      "dateUpdated": "2022-08-31T10:32:45+0000",
+      "dateUpdated": "2022-09-08T11:46:19+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -609,26 +606,26 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://zeppelin:4050/jobs/job?id=15",
-              "$$hashKey": "object:211556"
+              "jobUrl": "http://zeppelin:4050/jobs/job?id=5",
+              "$$hashKey": "object:124789"
             }
           ],
           "interpreterSettingId": "spark"
         }
       },
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661931454798_750509128",
+      "jobName": "paragraph_1662637236113_397787522",
       "id": "paragraph_1661931454798_750509128",
-      "dateCreated": "2022-08-31T07:37:34+0000",
-      "dateStarted": "2022-08-31T07:39:34+0000",
-      "dateFinished": "2022-08-31T07:39:35+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T11:46:19+0000",
+      "dateFinished": "2022-09-08T11:46:21+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210726"
+      "$$hashKey": "object:123916"
     },
     {
       "text": "airportDpDf.createOrReplaceTempView(\"dp_airport_v1_t\")",
       "user": "admin",
-      "dateUpdated": "2022-08-31T10:32:46+0000",
+      "dateUpdated": "2022-09-08T11:46:30+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -654,18 +651,62 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661933666334_542081232",
+      "jobName": "paragraph_1662637236113_202862459",
       "id": "paragraph_1661933666334_542081232",
-      "dateCreated": "2022-08-31T08:14:26+0000",
-      "dateStarted": "2022-08-31T08:14:45+0000",
-      "dateFinished": "2022-08-31T08:14:46+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T11:46:30+0000",
+      "dateFinished": "2022-09-08T11:46:30+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210727"
+      "$$hashKey": "object:123917"
+    },
+    {
+      "text": "%md\nLet's register the data product as a Hive table (so it is available in Trino)\n\nConnect to Hive-Metastore and create the `flight_db` database:\n\n```\ndocker exec -ti hive-metastore hive\n\nCREATE DATABASE mdm_db;\nUSE mdm_db;\n```\n\nand create the following table\n\n```\nCREATE EXTERNAL TABLE dp_airport_v1_t ( iata string\n                             , airport string\n                             , city string\n                             , state string\n                             , country string\n                             , latitude double\n                             , longitude double)\nSTORED AS parquet\nLOCATION 's3a://flight-bucket/dp/v1/airports';\n```",
+      "user": "admin",
+      "dateUpdated": "2022-09-08T14:13:11+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>Let&rsquo;s register the data product as a Hive table (so it is available in Trino)</p>\n<p>Connect to Hive-Metastore and create the <code>flight_db</code> database:</p>\n<pre><code>docker exec -ti hive-metastore hive\n\nCREATE DATABASE flight_db;\nUSE flight_db;\n</code></pre>\n<p>and create the following table</p>\n<pre><code>CREATE EXTERNAL TABLE dp_airport_v1_t ( iata string\n                             , airport string\n                             , city string\n                             , state string\n                             , country string\n                             , latitude double\n                             , longitude double)\nSTORED AS parquet\nLOCATION 's3a://flight-bucket/dp/v1/airports';\n</code></pre>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1662645292897_502906637",
+      "id": "paragraph_1662645292897_502906637",
+      "dateCreated": "2022-09-08T13:54:52+0000",
+      "dateStarted": "2022-09-08T14:00:48+0000",
+      "dateFinished": "2022-09-08T14:00:48+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:123918"
     },
     {
       "text": "%md\n## Carriers\n",
       "user": "admin",
-      "dateUpdated": "2022-08-31T07:18:34+0000",
+      "dateUpdated": "2022-09-08T11:46:33+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -698,18 +739,18 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661930288857_1493744104",
+      "jobName": "paragraph_1662637236113_2074895434",
       "id": "paragraph_1661930288857_1493744104",
-      "dateCreated": "2022-08-31T07:18:08+0000",
-      "dateStarted": "2022-08-31T07:18:34+0000",
-      "dateFinished": "2022-08-31T07:18:34+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T11:46:33+0000",
+      "dateFinished": "2022-09-08T11:46:33+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210728"
+      "$$hashKey": "object:123919"
     },
     {
       "text": "%md\n### Raw (Source) Zone",
       "user": "admin",
-      "dateUpdated": "2022-08-31T07:43:01+0000",
+      "dateUpdated": "2022-09-08T11:46:35+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -742,18 +783,18 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661931773676_1255425929",
+      "jobName": "paragraph_1662637236113_2106386230",
       "id": "paragraph_1661931773676_1255425929",
-      "dateCreated": "2022-08-31T07:42:53+0000",
-      "dateStarted": "2022-08-31T07:43:01+0000",
-      "dateFinished": "2022-08-31T07:43:01+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T11:46:35+0000",
+      "dateFinished": "2022-09-08T11:46:35+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210729"
+      "$$hashKey": "object:123920"
     },
     {
       "text": "%sql\nDROP TABLE raw_carriers_t;\n\nCREATE TABLE raw_carriers_t\nUSING JSON\nLOCATION \"s3a://flight-bucket/raw/carriers\"",
       "user": "admin",
-      "dateUpdated": "2022-08-31T07:17:05+0000",
+      "dateUpdated": "2022-09-08T11:40:36+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -777,34 +818,18 @@
         "msg": []
       },
       "apps": [],
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            {
-              "jobUrl": "http://zeppelin:4050/jobs/job?id=8",
-              "$$hashKey": "object:211601"
-            }
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661930063380_2127470998",
+      "jobName": "paragraph_1662637236113_1608341718",
       "id": "paragraph_1661930063380_2127470998",
-      "dateCreated": "2022-08-31T07:14:23+0000",
-      "dateStarted": "2022-08-31T07:17:05+0000",
-      "dateFinished": "2022-08-31T07:17:06+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:210730"
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "status": "READY",
+      "$$hashKey": "object:123921"
     },
     {
-      "text": "%md\n### Integration Zone",
+      "text": "%md\n### Refined Zone",
       "user": "admin",
-      "dateUpdated": "2022-08-31T07:43:18+0000",
+      "dateUpdated": "2022-09-08T14:00:58+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -830,25 +855,25 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<div class=\"markdown-body\">\n<h3>Integration Zone</h3>\n\n</div>"
+            "data": "<div class=\"markdown-body\">\n<h3>Refined Zone</h3>\n\n</div>"
           }
         ]
       },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661931608073_463895943",
+      "jobName": "paragraph_1662637236113_322983764",
       "id": "paragraph_1661931608073_463895943",
-      "dateCreated": "2022-08-31T07:40:08+0000",
-      "dateStarted": "2022-08-31T07:43:18+0000",
-      "dateFinished": "2022-08-31T07:43:18+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:00:58+0000",
+      "dateFinished": "2022-09-08T14:00:58+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210731"
+      "$$hashKey": "object:123922"
     },
     {
-      "text": "%md\n## Flights\n",
+      "text": "%md\n## Operations Domain\n",
       "user": "admin",
-      "dateUpdated": "2022-08-31T07:18:44+0000",
+      "dateUpdated": "2022-09-08T21:22:11+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -874,25 +899,25 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<div class=\"markdown-body\">\n<h2>Flights</h2>\n\n</div>"
+            "data": "<div class=\"markdown-body\">\n<h2>Operations Domain</h2>\n\n</div>"
           }
         ]
       },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661930317891_2139770898",
+      "jobName": "paragraph_1662637236113_1139873927",
       "id": "paragraph_1661930317891_2139770898",
-      "dateCreated": "2022-08-31T07:18:37+0000",
-      "dateStarted": "2022-08-31T07:18:44+0000",
-      "dateFinished": "2022-08-31T07:18:44+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T21:22:11+0000",
+      "dateFinished": "2022-09-08T21:22:11+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210732"
+      "$$hashKey": "object:123923"
     },
     {
       "text": "%md\n### Raw (Source) Zone",
       "user": "admin",
-      "dateUpdated": "2022-08-31T07:42:32+0000",
+      "dateUpdated": "2022-09-08T11:40:36+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -925,18 +950,16 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661931737702_327436049",
+      "jobName": "paragraph_1662637236113_822470921",
       "id": "paragraph_1661931737702_327436049",
-      "dateCreated": "2022-08-31T07:42:17+0000",
-      "dateStarted": "2022-08-31T07:42:32+0000",
-      "dateFinished": "2022-08-31T07:42:32+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:210733"
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "status": "READY",
+      "$$hashKey": "object:123924"
     },
     {
       "text": "%sql\n\nCREATE TABLE raw_flight_t\nUSING CSV\nOPTIONS (sep=\",\", inferSchema=\"true\", header=\"false\")\nLOCATION \"s3a://flight-bucket/raw/flights\"",
       "user": "admin",
-      "dateUpdated": "2022-08-31T07:44:11+0000",
+      "dateUpdated": "2022-09-08T14:01:01+0000",
       "progress": 33,
       "config": {
         "editorSetting": {
@@ -968,31 +991,31 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://zeppelin:4050/jobs/job?id=16",
-              "$$hashKey": "object:211649"
+              "jobUrl": "http://zeppelin:4050/jobs/job?id=6",
+              "$$hashKey": "object:124891"
             },
             {
-              "jobUrl": "http://zeppelin:4050/jobs/job?id=17",
-              "$$hashKey": "object:211650"
+              "jobUrl": "http://zeppelin:4050/jobs/job?id=7",
+              "$$hashKey": "object:124892"
             }
           ],
           "interpreterSettingId": "spark"
         }
       },
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661929974803_1507342414",
+      "jobName": "paragraph_1662637236113_1677273846",
       "id": "paragraph_1661929974803_1507342414",
-      "dateCreated": "2022-08-31T07:12:54+0000",
-      "dateStarted": "2022-08-31T07:44:11+0000",
-      "dateFinished": "2022-08-31T07:44:12+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:01:01+0000",
+      "dateFinished": "2022-09-08T14:01:07+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210734"
+      "$$hashKey": "object:123925"
     },
     {
       "text": "%sql\nselect * from raw_flight_t where _c22 IS NOT NULL;",
       "user": "admin",
-      "dateUpdated": "2022-08-31T07:57:03+0000",
-      "progress": 50,
+      "dateUpdated": "2022-09-08T11:40:36+0000",
+      "progress": 0,
       "config": {
         "editorSetting": {
           "language": "sql",
@@ -1076,38 +1099,18 @@
         ]
       },
       "apps": [],
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            {
-              "jobUrl": "http://zeppelin:4050/jobs/job?id=35",
-              "$$hashKey": "object:211688"
-            },
-            {
-              "jobUrl": "http://zeppelin:4050/jobs/job?id=36",
-              "$$hashKey": "object:211689"
-            }
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661930048688_2120214516",
+      "jobName": "paragraph_1662637236113_1817533535",
       "id": "paragraph_1661930048688_2120214516",
-      "dateCreated": "2022-08-31T07:14:08+0000",
-      "dateStarted": "2022-08-31T07:57:03+0000",
-      "dateFinished": "2022-08-31T07:57:04+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:210735"
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "status": "READY",
+      "$$hashKey": "object:123926"
     },
     {
-      "text": "%md\n## Integration Zone\n",
+      "text": "%md\n## Refined Zone\n",
       "user": "admin",
-      "dateUpdated": "2022-08-31T07:43:46+0000",
+      "dateUpdated": "2022-09-08T14:01:12+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -1133,26 +1136,26 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<div class=\"markdown-body\">\n<h2>Integration Zone</h2>\n\n</div>"
+            "data": "<div class=\"markdown-body\">\n<h2>Refined Zone</h2>\n\n</div>"
           }
         ]
       },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661931819135_1487753748",
+      "jobName": "paragraph_1662637236114_179233266",
       "id": "paragraph_1661931819135_1487753748",
-      "dateCreated": "2022-08-31T07:43:39+0000",
-      "dateStarted": "2022-08-31T07:43:46+0000",
-      "dateFinished": "2022-08-31T07:43:46+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:01:12+0000",
+      "dateFinished": "2022-09-08T14:01:12+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210736"
+      "$$hashKey": "object:123927"
     },
     {
       "text": "%sql\nSELECT INT (_c0)    AS year\n,   INT(_c1)        AS month\n,   INT(_c2)        AS day_of_month\n,   INT(_c3)        AS day_of_week\n,   INT(_c4)        AS departure_time\n,   INT(_c5)        AS scheduled_departure_time\n,   INT(_c6)        AS arrival_time\n,   INT(_c7)        AS scheduled_arrival_time\n,   STRING(_c8)     AS unique_carrier\n,   STRING(_c9)     AS flight_number\n,   STRING(_c10)    AS tail_number\n,   INT(_c11)       AS actual_elapsed_time\n,   INT(_c12)       AS estimated_elapsed_time\n,   INT(_c13)       AS airtime\n,   INT(_c14)       AS arrival_delay\n,   INT(_c15)       AS departure_delay\n,   STRING(_c16)    AS origin_airport_iata\n,   STRING(_c17)    AS destination_airport_iata\n,   INT(_c18)       AS distance\n,   INT(_c19)       AS taxi_in\n,   INT(_c20)       AS taxi_out\n,   INT(_c21)    AS cancelled\n,   STRING(_c22)    AS cancellation_code\n,   CASE \n         WHEN _c22 = 'A' THEN 'carrier'\n         WHEN _c22 = 'B' THEN 'weather'\n         WHEN _c22 = 'C' THEN 'NAS'\n         WHEN _c22 = 'D' THEN 'security'\n    END             AS cancellation_reason\n,   STRING(_c23)    AS diverted\n,   INT(_c24)       AS carrier_delay\n,   INT(_c25)       AS weather_delay\n,   INT(_c26)       AS nas_delay\n,   INT(_c27)       AS security_delay\n,   INT(_c28)       AS late_aircraft_delay\nFROM raw_flight_t\n",
       "user": "admin",
-      "dateUpdated": "2022-08-31T08:06:59+0000",
-      "progress": 100,
+      "dateUpdated": "2022-09-08T11:40:36+0000",
+      "progress": 0,
       "config": {
         "editorSetting": {
           "language": "sql",
@@ -1241,34 +1244,18 @@
         ]
       },
       "apps": [],
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            {
-              "jobUrl": "http://zeppelin:4050/jobs/job?id=44",
-              "$$hashKey": "object:211742"
-            }
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661930176522_1606053714",
+      "jobName": "paragraph_1662637236115_541986282",
       "id": "paragraph_1661930176522_1606053714",
-      "dateCreated": "2022-08-31T07:16:16+0000",
-      "dateStarted": "2022-08-31T08:06:57+0000",
-      "dateFinished": "2022-08-31T08:06:58+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:210737"
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "status": "READY",
+      "$$hashKey": "object:123928"
     },
     {
-      "text": "val fligthIntDf = spark.sql(\"\"\"\nSELECT INT (_c0)    AS year\n,   INT(_c1)        AS month\n,   INT(_c2)        AS day_of_month\n,   INT(_c3)        AS day_of_week\n,   INT(_c4)        AS departure_time\n,   INT(_c5)        AS scheduled_departure_time\n,   INT(_c6)        AS arrival_time\n,   INT(_c7)        AS scheduled_arrival_time\n,   STRING(_c8)     AS unique_carrier\n,   STRING(_c9)     AS flight_number\n,   STRING(_c10)    AS tail_number\n,   INT(_c11)       AS actual_elapsed_time\n,   INT(_c12)       AS estimated_elapsed_time\n,   INT(_c13)       AS airtime\n,   INT(_c14)       AS arrival_delay\n,   INT(_c15)       AS departure_delay\n,   STRING(_c16)    AS origin_airport_iata\n,   STRING(_c17)    AS destination_airport_iata\n,   INT(_c18)       AS distance\n,   INT(_c19)       AS taxi_in\n,   INT(_c20)       AS taxi_out\n,   INT(_c21)       AS cancelled\n,   STRING(_c22)    AS cancellation_code\n,   CASE \n         WHEN _c22 = 'A' THEN 'carrier'\n         WHEN _c22 = 'B' THEN 'weather'\n         WHEN _c22 = 'C' THEN 'NAS'\n         WHEN _c22 = 'D' THEN 'security'\n    END             AS cancellation_reason\n,   STRING(_c23)    AS diverted\n,   INT(_c24)       AS carrier_delay\n,   INT(_c25)       AS weather_delay\n,   INT(_c26)       AS nas_delay\n,   INT(_c27)       AS security_delay\n,   INT(_c28)       AS late_aircraft_delay\nFROM raw_flight_t\n\"\"\")\n",
+      "text": "val fligthRefDf = spark.sql(\"\"\"\nSELECT INT (_c0)    AS year\n,   INT(_c1)        AS month\n,   INT(_c2)        AS day_of_month\n,   INT(_c3)        AS day_of_week\n,   INT(_c4)        AS departure_time\n,   INT(_c5)        AS scheduled_departure_time\n,   INT(_c6)        AS arrival_time\n,   INT(_c7)        AS scheduled_arrival_time\n,   STRING(_c8)     AS unique_carrier\n,   STRING(_c9)     AS flight_number\n,   STRING(_c10)    AS tail_number\n,   INT(_c11)       AS actual_elapsed_time\n,   INT(_c12)       AS estimated_elapsed_time\n,   INT(_c13)       AS airtime\n,   INT(_c14)       AS arrival_delay\n,   INT(_c15)       AS departure_delay\n,   STRING(_c16)    AS origin_airport_iata\n,   STRING(_c17)    AS destination_airport_iata\n,   INT(_c18)       AS distance\n,   INT(_c19)       AS taxi_in\n,   INT(_c20)       AS taxi_out\n,   INT(_c21)       AS cancelled\n,   STRING(_c22)    AS cancellation_code\n,   CASE \n         WHEN _c22 = 'A' THEN 'carrier'\n         WHEN _c22 = 'B' THEN 'weather'\n         WHEN _c22 = 'C' THEN 'NAS'\n         WHEN _c22 = 'D' THEN 'security'\n    END             AS cancellation_reason\n,   STRING(_c23)    AS diverted\n,   INT(_c24)       AS carrier_delay\n,   INT(_c25)       AS weather_delay\n,   INT(_c26)       AS nas_delay\n,   INT(_c27)       AS security_delay\n,   INT(_c28)       AS late_aircraft_delay\nFROM raw_flight_t\n\"\"\")\n",
       "user": "admin",
-      "dateUpdated": "2022-08-31T08:16:26+0000",
+      "dateUpdated": "2022-09-08T14:01:32+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -1292,26 +1279,26 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\u001b[1m\u001b[34mfligthIntDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [year: int, month: int ... 28 more fields]\n"
+            "data": "\u001b[1m\u001b[34mfligthRefDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [year: int, month: int ... 28 more fields]\n"
           }
         ]
       },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661931860905_1073798618",
+      "jobName": "paragraph_1662637236118_1398577243",
       "id": "paragraph_1661931860905_1073798618",
-      "dateCreated": "2022-08-31T07:44:20+0000",
-      "dateStarted": "2022-08-31T08:07:52+0000",
-      "dateFinished": "2022-08-31T08:07:52+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:01:32+0000",
+      "dateFinished": "2022-09-08T14:01:32+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210738"
+      "$$hashKey": "object:123929"
     },
     {
-      "text": "fligthIntDf.write.parquet(\"s3a://flight-bucket/integration/flights\")\n",
+      "text": "fligthRefDf.write.parquet(\"s3a://flight-bucket/refined/flights\")\n",
       "user": "admin",
-      "dateUpdated": "2022-08-31T08:11:04+0000",
-      "progress": 100,
+      "dateUpdated": "2022-09-08T14:01:41+0000",
+      "progress": 66,
       "config": {
         "editorSetting": {
           "language": "scala",
@@ -1342,26 +1329,26 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://zeppelin:4050/jobs/job?id=45",
-              "$$hashKey": "object:211768"
+              "jobUrl": "http://zeppelin:4050/jobs/job?id=8",
+              "$$hashKey": "object:125001"
             }
           ],
           "interpreterSettingId": "spark"
         }
       },
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661933454400_253744729",
+      "jobName": "paragraph_1662637236118_391021332",
       "id": "paragraph_1661933454400_253744729",
-      "dateCreated": "2022-08-31T08:10:54+0000",
-      "dateStarted": "2022-08-31T08:11:04+0000",
-      "dateFinished": "2022-08-31T08:11:08+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:01:41+0000",
+      "dateFinished": "2022-09-08T14:01:46+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210739"
+      "$$hashKey": "object:123930"
     },
     {
-      "text": "fligthIntDf.createOrReplaceTempView(\"int_flight_t\")",
+      "text": "fligthRefDf.createOrReplaceTempView(\"ref_flight_t\")",
       "user": "admin",
-      "dateUpdated": "2022-08-31T08:11:43+0000",
+      "dateUpdated": "2022-09-08T14:01:52+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -1387,18 +1374,18 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661933272096_705819376",
+      "jobName": "paragraph_1662637236118_1789392338",
       "id": "paragraph_1661933272096_705819376",
-      "dateCreated": "2022-08-31T08:07:52+0000",
-      "dateStarted": "2022-08-31T08:11:43+0000",
-      "dateFinished": "2022-08-31T08:11:43+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:01:52+0000",
+      "dateFinished": "2022-09-08T14:01:53+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210740"
+      "$$hashKey": "object:123931"
     },
     {
-      "text": "%md\n### Refined Zone",
+      "text": "%md\n### Usage Optimized Zone",
       "user": "admin",
-      "dateUpdated": "2022-08-31T08:13:00+0000",
+      "dateUpdated": "2022-09-08T14:02:14+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -1424,25 +1411,25 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<div class=\"markdown-body\">\n<h3>Refined Zone</h3>\n\n</div>"
+            "data": "<div class=\"markdown-body\">\n<h3>Usage Optimized Zone</h3>\n\n</div>"
           }
         ]
       },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661933503766_1231649564",
+      "jobName": "paragraph_1662637236123_1301591494",
       "id": "paragraph_1661933503766_1231649564",
-      "dateCreated": "2022-08-31T08:11:43+0000",
-      "dateStarted": "2022-08-31T08:13:00+0000",
-      "dateFinished": "2022-08-31T08:13:00+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:02:14+0000",
+      "dateFinished": "2022-09-08T14:02:14+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210741"
+      "$$hashKey": "object:123932"
     },
     {
-      "text": "%sql\nSELECT f.*\n,      orig.airport          AS origin_airport\n,      orig.city             AS origin_city\n,      dest.airport          AS destination_airport\n,      dest.city             AS destination_city\nFROM int_flight_t    f\nLEFT JOIN dp_airport_v1_t     orig\n    ON (f.origin_airport_iata = orig.iata)\nLEFT JOIN dp_airport_v1_t     dest\n    ON (f.destination_airport_iata = dest.iata)\n\n",
+      "text": "%sql\nSELECT f.*\n,      orig.airport          AS origin_airport\n,      orig.city             AS origin_city\n,      dest.airport          AS destination_airport\n,      dest.city             AS destination_city\nFROM ref_flight_t    f\nLEFT JOIN dp_airport_v1_t     orig\n    ON (f.origin_airport_iata = orig.iata)\nLEFT JOIN dp_airport_v1_t     dest\n    ON (f.destination_airport_iata = dest.iata)\n\n",
       "user": "admin",
-      "dateUpdated": "2022-08-31T08:20:05+0000",
+      "dateUpdated": "2022-09-08T14:02:20+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -1544,26 +1531,26 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://zeppelin:4050/jobs/job?id=54",
-              "$$hashKey": "object:211828"
+              "jobUrl": "http://zeppelin:4050/jobs/job?id=10",
+              "$$hashKey": "object:125061"
             }
           ],
           "interpreterSettingId": "spark"
         }
       },
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661933582133_612642403",
+      "jobName": "paragraph_1662637236123_1633831664",
       "id": "paragraph_1661933582133_612642403",
-      "dateCreated": "2022-08-31T08:13:02+0000",
-      "dateStarted": "2022-08-31T08:20:04+0000",
-      "dateFinished": "2022-08-31T08:20:05+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:02:20+0000",
+      "dateFinished": "2022-09-08T14:02:22+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210742"
+      "$$hashKey": "object:123933"
     },
     {
-      "text": "val flightRefinedDf = spark.sql(\"\"\"\nSELECT f.*\n,      orig.airport          AS origin_airport\n,      orig.city             AS origin_city\n,      dest.airport          AS destination_airport\n,      dest.city             AS destination_city\nFROM int_flight_t    f\nLEFT JOIN dp_airport_v1_t     orig\n    ON (f.origin_airport_iata = orig.iata)\nLEFT JOIN dp_airport_v1_t     dest\n    ON (f.destination_airport_iata = dest.iata)\n\"\"\")\n",
+      "text": "val flightUsageOptDf = spark.sql(\"\"\"\nSELECT f.*\n,      orig.airport          AS origin_airport\n,      orig.city             AS origin_city\n,      dest.airport          AS destination_airport\n,      dest.city             AS destination_city\nFROM ref_flight_t    f\nLEFT JOIN dp_airport_v1_t     orig\n    ON (f.origin_airport_iata = orig.iata)\nLEFT JOIN dp_airport_v1_t     dest\n    ON (f.destination_airport_iata = dest.iata)\n\"\"\")\n",
       "user": "admin",
-      "dateUpdated": "2022-08-31T10:31:25+0000",
+      "dateUpdated": "2022-09-08T14:02:38+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -1587,186 +1574,25 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\u001b[1m\u001b[34mflightRefinedDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [year: int, month: int ... 32 more fields]\n"
+            "data": "\u001b[1m\u001b[34mflightUsageOptDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [year: int, month: int ... 32 more fields]\n"
           }
         ]
       },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661934009176_1757079203",
+      "jobName": "paragraph_1662637236126_503858314",
       "id": "paragraph_1661934009176_1757079203",
-      "dateCreated": "2022-08-31T08:20:09+0000",
-      "dateStarted": "2022-08-31T08:20:58+0000",
-      "dateFinished": "2022-08-31T08:20:59+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:02:38+0000",
+      "dateFinished": "2022-09-08T14:02:38+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210743"
+      "$$hashKey": "object:123934"
     },
     {
-      "text": "flightRefinedDf.write.parquet(\"s3a://flight-bucket/refined/flights\")",
+      "text": "flightUsageOptDf.write.parquet(\"s3a://flight-bucket/usageopt/flights\")",
       "user": "admin",
-      "dateUpdated": "2022-08-31T09:42:09+0000",
-      "progress": 33,
-      "config": {
-        "editorSetting": {
-          "language": "scala",
-          "editOnDblClick": false,
-          "completionKey": "TAB",
-          "completionSupport": true
-        },
-        "colWidth": 12,
-        "editorMode": "ace/mode/scala",
-        "fontSize": 9,
-        "results": {},
-        "enabled": true
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {
-        "code": "SUCCESS",
-        "msg": []
-      },
-      "apps": [],
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            {
-              "jobUrl": "http://zeppelin:4050/jobs/job?id=58",
-              "$$hashKey": "object:211854"
-            }
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661938718383_670261181",
-      "id": "paragraph_1661938718383_670261181",
-      "dateCreated": "2022-08-31T09:38:38+0000",
-      "dateStarted": "2022-08-31T09:42:09+0000",
-      "dateFinished": "2022-08-31T09:42:12+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:210744"
-    },
-    {
-      "text": "flightRefinedDf.createOrReplaceTempView(\"ref_flight_t\")",
-      "user": "admin",
-      "dateUpdated": "2022-08-31T09:39:07+0000",
-      "progress": 0,
-      "config": {
-        "editorSetting": {
-          "language": "scala",
-          "editOnDblClick": false,
-          "completionKey": "TAB",
-          "completionSupport": true
-        },
-        "colWidth": 12,
-        "editorMode": "ace/mode/scala",
-        "fontSize": 9,
-        "results": {},
-        "enabled": true
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {
-        "code": "SUCCESS",
-        "msg": []
-      },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661934906392_1659407129",
-      "id": "paragraph_1661934906392_1659407129",
-      "dateCreated": "2022-08-31T08:35:06+0000",
-      "dateStarted": "2022-08-31T09:39:07+0000",
-      "dateFinished": "2022-08-31T09:39:07+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:210745"
-    },
-    {
-      "text": "%sql\nSELECT arrival_delay, origin_airport_iata, destination_airport_iata,\n    CASE\n         WHEN arrival_delay > 360 THEN 'Very Long Delays'\n         WHEN arrival_delay > 120 AND arrival_delay < 360 THEN 'Long Delays'\n         WHEN arrival_delay > 60 AND arrival_delay < 120 THEN 'Short Delays'\n         WHEN arrival_delay > 0 and arrival_delay < 60 THEN 'Tolerable Delays'\n         WHEN arrival_delay = 0 THEN 'No Delays'\n         ELSE 'Early'\n    END AS flight_delays\n         FROM int_flight_t\n         ORDER BY arrival_delay DESC",
-      "user": "admin",
-      "dateUpdated": "2022-08-31T09:51:33+0000",
-      "progress": 0,
-      "config": {
-        "colWidth": 12,
-        "fontSize": 9,
-        "enabled": true,
-        "results": {},
-        "editorSetting": {
-          "language": "sql",
-          "editOnDblClick": false,
-          "completionKey": "TAB",
-          "completionSupport": true
-        },
-        "editorMode": "ace/mode/sql"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661939492967_1779601538",
-      "id": "paragraph_1661939492967_1779601538",
-      "dateCreated": "2022-08-31T09:51:32+0000",
-      "status": "READY",
-      "$$hashKey": "object:210746"
-    },
-    {
-      "text": "val flightDelayRefinedDf = spark.sql(\"\"\"\nSELECT arrival_delay, origin_airport_iata, destination_airport_iata,\n    CASE\n         WHEN arrival_delay > 360 THEN 'Very Long Delays'\n         WHEN arrival_delay > 120 AND arrival_delay < 360 THEN 'Long Delays'\n         WHEN arrival_delay > 60 AND arrival_delay < 120 THEN 'Short Delays'\n         WHEN arrival_delay > 0 and arrival_delay < 60 THEN 'Tolerable Delays'\n         WHEN arrival_delay = 0 THEN 'No Delays'\n         ELSE 'Early'\n    END AS flight_delays\n         FROM int_flight_t\n         ORDER BY arrival_delay DESC\n\"\"\")\n",
-      "user": "admin",
-      "dateUpdated": "2022-08-31T10:22:05+0000",
-      "progress": 0,
-      "config": {
-        "editorSetting": {
-          "language": "scala",
-          "editOnDblClick": false,
-          "completionKey": "TAB",
-          "completionSupport": true
-        },
-        "colWidth": 12,
-        "editorMode": "ace/mode/scala",
-        "fontSize": 9,
-        "results": {},
-        "enabled": true
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "\u001b[1m\u001b[34mflightDelayRefinedDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [arrival_delay: int, origin_airport_iata: string ... 2 more fields]\n"
-          }
-        ]
-      },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661939498635_1729619232",
-      "id": "paragraph_1661939498635_1729619232",
-      "dateCreated": "2022-08-31T09:51:38+0000",
-      "dateStarted": "2022-08-31T10:22:05+0000",
-      "dateFinished": "2022-08-31T10:22:05+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:210747"
-    },
-    {
-      "text": "flightDelayRefinedDf.write.parquet(\"s3a://flight-bucket/refined/flight_delays\")",
-      "user": "admin",
-      "dateUpdated": "2022-08-31T10:22:07+0000",
+      "dateUpdated": "2022-09-08T14:02:53+0000",
       "progress": 100,
       "config": {
         "editorSetting": {
@@ -1798,30 +1624,26 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://zeppelin:4050/jobs/job?id=67",
-              "$$hashKey": "object:211898"
-            },
-            {
-              "jobUrl": "http://zeppelin:4050/jobs/job?id=68",
-              "$$hashKey": "object:211899"
+              "jobUrl": "http://zeppelin:4050/jobs/job?id=13",
+              "$$hashKey": "object:125087"
             }
           ],
           "interpreterSettingId": "spark"
         }
       },
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661939543334_1162401781",
-      "id": "paragraph_1661939543334_1162401781",
-      "dateCreated": "2022-08-31T09:52:23+0000",
-      "dateStarted": "2022-08-31T10:22:07+0000",
-      "dateFinished": "2022-08-31T10:22:23+0000",
+      "jobName": "paragraph_1662637236126_189165854",
+      "id": "paragraph_1661938718383_670261181",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:02:53+0000",
+      "dateFinished": "2022-09-08T14:02:58+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210748"
+      "$$hashKey": "object:123935"
     },
     {
-      "text": "flightDelayRefinedDf.createOrReplaceTempView(\"ref_flight_delay_t\")",
+      "text": "flightUsageOptDf.createOrReplaceTempView(\"usageopt_flight_t\")",
       "user": "admin",
-      "dateUpdated": "2022-08-31T10:22:25+0000",
+      "dateUpdated": "2022-09-08T14:04:38+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -1847,18 +1669,243 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661939584498_629984274",
-      "id": "paragraph_1661939584498_629984274",
-      "dateCreated": "2022-08-31T09:53:04+0000",
-      "dateStarted": "2022-08-31T10:22:25+0000",
-      "dateFinished": "2022-08-31T10:22:25+0000",
+      "jobName": "paragraph_1662637236126_1146440363",
+      "id": "paragraph_1661934906392_1659407129",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:04:38+0000",
+      "dateFinished": "2022-09-08T14:04:38+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210749"
+      "$$hashKey": "object:123936"
+    },
+    {
+      "text": "%sql\nSELECT arrival_delay, origin_airport_iata, destination_airport_iata,\n    CASE\n         WHEN arrival_delay > 360 THEN 'Very Long Delays'\n         WHEN arrival_delay > 120 AND arrival_delay < 360 THEN 'Long Delays'\n         WHEN arrival_delay > 60 AND arrival_delay < 120 THEN 'Short Delays'\n         WHEN arrival_delay > 0 and arrival_delay < 60 THEN 'Tolerable Delays'\n         WHEN arrival_delay = 0 THEN 'No Delays'\n         ELSE 'Early'\n    END AS flight_delays\n         FROM ref_flight_t\n         ORDER BY arrival_delay DESC",
+      "user": "admin",
+      "dateUpdated": "2022-09-08T14:03:11+0000",
+      "progress": 33,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "arrival_delay": "string",
+                      "origin_airport_iata": "string",
+                      "destination_airport_iata": "string",
+                      "flight_delays": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "arrival_delay\torigin_airport_iata\tdestination_airport_iata\tflight_delays\n1034\tSEA\tHNL\tVery Long Delays\n864\tOGG\tSEA\tVery Long Delays\n835\tSFO\tHNL\tVery Long Delays\n823\tSEA\tOGG\tVery Long Delays\n722\tMRY\tLAX\tVery Long Delays\n666\tHNL\tSEA\tVery Long Delays\n626\tHNL\tPHX\tVery Long Delays\n624\tHNL\tSMF\tVery Long Delays\n539\tSAN\tATL\tVery Long Delays\n521\tLAS\tHNL\tVery Long Delays\n516\tLAS\tHNL\tVery Long Delays\n501\tMSP\tATL\tVery Long Delays\n480\tHNL\tPHX\tVery Long Delays\n472\tATL\tEWR\tVery Long Delays\n454\tLAX\tHNL\tVery Long Delays\n448\tEWR\tATL\tVery Long Delays\n438\tSEA\tATL\tVery Long Delays\n434\tHNL\tLAX\tVery Long Delays\n390\tHNL\tLAX\tVery Long Delays\n360\tIAD\tATL\tEarly\n333\tEWR\tATL\tLong Delays\n320\tHNL\tPDX\tLong Delays\n313\tBWI\tTPA\tLong Delays\n309\tHNL\tPHX\tLong Delays\n304\tPHL\tATL\tLong Delays\n296\tHNL\tPHX\tLong Delays\n295\tPHL\tMCO\tLong Delays\n293\tCLT\tATL\tLong Delays\n292\tCLT\tATL\tLong Delays\n292\tTPA\tBWI\tLong Delays\n289\tCLT\tATL\tLong Delays\n287\tATL\tMCO\tLong Delays\n284\tATL\tCLT\tLong Delays\n283\tATL\tEWR\tLong Delays\n282\tBWI\tCLT\tLong Delays\n280\tJAX\tPHL\tLong Delays\n277\tBUF\tATL\tLong Delays\n270\tHNL\tLAS\tLong Delays\n269\tLAX\tHNL\tLong Delays\n266\tCAK\tLGA\tLong Delays\n266\tLAS\tHNL\tLong Delays\n263\tHNL\tLAS\tLong Delays\n261\tBWI\tATL\tLong Delays\n260\tATL\tDAY\tLong Delays\n259\tPHL\tJAX\tLong Delays\n257\tATL\tMKE\tLong Delays\n255\tLGA\tMCO\tLong Delays\n252\tLGA\tMCO\tLong Delays\n251\tPHF\tLGA\tLong Delays\n250\tSEA\tOGG\tLong Delays\n250\tHNL\tPHX\tLong Delays\n249\tHNL\tLAS\tLong Delays\n249\tDAY\tATL\tLong Delays\n247\tEWR\tATL\tLong Delays\n247\tKOA\tHNL\tLong Delays\n247\tDCA\tATL\tLong Delays\n247\tDAB\tATL\tLong Delays\n243\tLGA\tATL\tLong Delays\n243\tATL\tPHL\tLong Delays\n240\tLAX\tHNL\tLong Delays\n237\tEWR\tATL\tLong Delays\n237\tOGG\tPDX\tLong Delays\n234\tLGA\tMCO\tLong Delays\n233\tPHL\tATL\tLong Delays\n231\tATL\tPHL\tLong Delays\n231\tIND\tTPA\tLong Delays\n230\tATL\tLGA\tLong Delays\n228\tKOA\tHNL\tLong Delays\n227\tATL\tEWR\tLong Delays\n226\tLGA\tPHF\tLong Delays\n226\tTPA\tATL\tLong Delays\n225\tBWI\tDAY\tLong Delays\n225\tATL\tLGA\tLong Delays\n225\tHOU\tLAX\tLong Delays\n224\tLGA\tATL\tLong Delays\n222\tIND\tLAX\tLong Delays\n220\tOGG\tHNL\tLong Delays\n219\tLGA\tATL\tLong Delays\n219\tPHL\tFLL\tLong Delays\n218\tLGA\tATL\tLong Delays\n218\tATL\tLGA\tLong Delays\n218\tLGA\tMKE\tLong Delays\n216\tCLT\tBWI\tLong Delays\n216\tATL\tFLL\tLong Delays\n216\tIAD\tATL\tLong Delays\n216\tMCO\tIND\tLong Delays\n215\tMDW\tIND\tLong Delays\n214\tEWR\tATL\tLong Delays\n214\tPHL\tMCO\tLong Delays\n213\tHOU\tCRP\tLong Delays\n213\tATL\tDCA\tLong Delays\n212\tBWI\tBTV\tLong Delays\n211\tSLC\tOAK\tLong Delays\n211\tDCA\tATL\tLong Delays\n210\tHNL\tLAX\tLong Delays\n209\tDCA\tATL\tLong Delays\n208\tMCO\tDAY\tLong Delays\n208\tMCO\tSJU\tLong Delays\n207\tSTL\tSLC\tLong Delays\n207\tBTV\tBWI\tLong Delays\n207\tFLL\tJAX\tLong Delays\n206\tDAL\tHOU\tLong Delays\n206\tHOU\tDAL\tLong Delays\n205\tBWI\tBOS\tLong Delays\n204\tPHL\tMCO\tLong Delays\n203\tDAL\tMAF\tLong Delays\n203\tBTV\tBWI\tLong Delays\n202\tMKE\tSFO\tLong Delays\n202\tATL\tEWR\tLong Delays\n200\tMAF\tDAL\tLong Delays\n200\tMCO\tBWI\tLong Delays\n200\tPHL\tMCO\tLong Delays\n199\tMCO\tPHL\tLong Delays\n199\tJAX\tBHM\tLong Delays\n199\tLAX\tSFO\tLong Delays\n198\tISP\tFLL\tLong Delays\n197\tMSY\tATL\tLong Delays\n197\tATL\tPNS\tLong Delays\n196\tHNL\tLAX\tLong Delays\n196\tTPA\tBWI\tLong Delays\n195\tPHL\tATL\tLong Delays\n195\tATL\tLAS\tLong Delays\n195\tLAX\tHNL\tLong Delays\n195\tMCO\tSTL\tLong Delays\n194\tMCO\tDFW\tLong Delays\n194\tATL\tEWR\tLong Delays\n194\tATL\tMCI\tLong Delays\n192\tFLL\tJAX\tLong Delays\n192\tBWI\tIND\tLong Delays\n192\tATL\tDCA\tLong Delays\n191\tATL\tEWR\tLong Delays\n191\tMKE\tSFO\tLong Delays\n191\tLGA\tATL\tLong Delays\n190\tSMF\tPDX\tLong Delays\n189\tBHM\tLAS\tLong Delays\n189\tMCO\tBWI\tLong Delays\n189\tMCO\tRIC\tLong Delays\n189\tSAT\tPHL\tLong Delays\n188\tSJU\tMCO\tLong Delays\n188\tATL\tBWI\tLong Delays\n188\tMCO\tATL\tLong Delays\n187\tATL\tBOS\tLong Delays\n187\tLGA\tPHF\tLong Delays\n186\tMCO\tALB\tLong Delays\n185\tLGA\tPHF\tLong Delays\n185\tBWI\tATL\tLong Delays\n185\tSEA\tHNL\tLong Delays\n185\tHOU\tDAL\tLong Delays\n185\tCHS\tATL\tLong Delays\n185\tBOS\tBWI\tLong Delays\n184\tATL\tLAS\tLong Delays\n184\tLGA\tATL\tLong Delays\n184\tFLL\tISP\tLong Delays\n184\tSTL\tBWI\tLong Delays\n183\tPIT\tMCO\tLong Delays\n183\tBWI\tROC\tLong Delays\n182\tHRL\tHOU\tLong Delays\n181\tPHL\tHOU\tLong Delays\n181\tDTW\tATL\tLong Delays\n179\tATL\tTPA\tLong Delays\n179\tHOU\tHRL\tLong Delays\n179\tHOU\tDAL\tLong Delays\n178\tBWI\tBOS\tLong Delays\n178\tATL\tPHF\tLong Delays\n178\tLGA\tMKE\tLong Delays\n178\tLAX\tSMF\tLong Delays\n177\tSFO\tMKE\tLong Delays\n177\tPVD\tPHL\tLong Delays\n176\tHNL\tSEA\tLong Delays\n175\tDTW\tATL\tLong Delays\n175\tMHT\tBWI\tLong Delays\n175\tPHL\tSTL\tLong Delays\n174\tBNA\tAUS\tLong Delays\n174\tOKC\tBWI\tLong Delays\n174\tBHM\tDAL\tLong Delays\n173\tBNA\tBHM\tLong Delays\n173\tBUF\tLAS\tLong Delays\n173\tFLL\tBWI\tLong Delays\n173\tBOS\tBWI\tLong Delays\n173\tBWI\tTPA\tLong Delays\n173\tMDW\tPHX\tLong Delays\n172\tATL\tFLL\tLong Delays\n172\tATL\tDAY\tLong Delays\n172\tATL\tMSY\tLong Delays\n172\tPHL\tPIT\tLong Delays\n172\tMCO\tPHL\tLong Delays\n172\tOKC\tHOU\tLong Delays\n172\tATL\tPHL\tLong Delays\n172\tSAT\tPHX\tLong Delays\n171\tATL\tPHL\tLong Delays\n171\tMCO\tLGA\tLong Delays\n171\tDAL\tLIT\tLong Delays\n171\tATL\tLGA\tLong Delays\n170\tHOU\tPHL\tLong Delays\n170\tDAL\tAUS\tLong Delays\n170\tEWR\tATL\tLong Delays\n170\tSFO\tLAX\tLong Delays\n170\tBOS\tBWI\tLong Delays\n170\tMDW\tSRQ\tLong Delays\n169\tTPA\tMDW\tLong Delays\n169\tMKE\tLGA\tLong Delays\n169\tDAL\tELP\tLong Delays\n169\tDAL\tSAT\tLong Delays\n168\tIAD\tMCO\tLong Delays\n167\tBOS\tBWI\tLong Delays\n167\tDAL\tELP\tLong Delays\n167\tMKE\tSFO\tLong Delays\n166\tMCO\tIND\tLong Delays\n166\tSDF\tMDW\tLong Delays\n166\tLGA\tATL\tLong Delays\n165\tMKE\tLGA\tLong Delays\n165\tATL\tDEN\tLong Delays\n164\tLGA\tMKE\tLong Delays\n164\tPHL\tTPA\tLong Delays\n164\tCAK\tLGA\tLong Delays\n164\tPHX\tSMF\tLong Delays\n163\tPHL\tATL\tLong Delays\n163\tATL\tMLI\tLong Delays\n163\tFLL\tPHF\tLong Delays\n163\tBWI\tBOS\tLong Delays\n163\tAUS\tDAL\tLong Delays\n163\tPHL\tCMH\tLong Delays\n163\tFLL\tBWI\tLong Delays\n162\tMCO\tCLT\tLong Delays\n162\tMDW\tPHL\tLong Delays\n162\tMKE\tLGA\tLong Delays\n162\tLGA\tMCO\tLong Delays\n162\tELP\tPHX\tLong Delays\n162\tELP\tPHX\tLong Delays\n161\tSAN\tATL\tLong Delays\n161\tSFO\tIND\tLong Delays\n161\tLGA\tATL\tLong Delays\n161\tJAX\tFLL\tLong Delays\n161\tFLL\tATL\tLong Delays\n160\tSWF\tTPA\tLong Delays\n160\tPHL\tMCO\tLong Delays\n160\tSAT\tHOU\tLong Delays\n160\tBWI\tBUF\tLong Delays\n160\tHOU\tSAT\tLong Delays\n159\tPHX\tHNL\tLong Delays\n159\tPIT\tPHL\tLong Delays\n159\tPHF\tATL\tLong Delays\n159\tMDW\tPHL\tLong Delays\n159\tATL\tPHL\tLong Delays\n159\tPHL\tMCO\tLong Delays\n158\tDCA\tRSW\tLong Delays\n157\tPNS\tATL\tLong Delays\n157\tHOU\tTUL\tLong Delays\n157\tHOU\tMDW\tLong Delays\n157\tROC\tBWI\tLong Delays\n157\tATL\tIAD\tLong Delays\n157\tPHL\tBNA\tLong Delays\n157\tLAS\tATL\tLong Delays\n156\tLGA\tATL\tLong Delays\n156\tMCO\tPHL\tLong Delays\n156\tMCO\tPHL\tLong Delays\n156\tCAK\tLGA\tLong Delays\n156\tATL\tMCO\tLong Delays\n155\tATL\tDCA\tLong Delays\n155\tATL\tMCO\tLong Delays\n155\tLAX\tSBP\tLong Delays\n155\tELP\tPHX\tLong Delays\n155\tMCO\tPHL\tLong Delays\n155\tATL\tTPA\tLong Delays\n155\tSMF\tONT\tLong Delays\n154\tPHX\tSAN\tLong Delays\n154\tBWI\tBOS\tLong Delays\n154\tLAS\tSMF\tLong Delays\n154\tMEM\tATL\tLong Delays\n154\tMCO\tBWI\tLong Delays\n154\tMDW\tSJC\tLong Delays\n154\tMKE\tSFO\tLong Delays\n153\tEWR\tATL\tLong Delays\n153\tHPN\tPBI\tLong Delays\n153\tIND\tJAX\tLong Delays\n153\tLGA\tPHF\tLong Delays\n153\tPHF\tATL\tLong Delays\n153\tATL\tMEM\tLong Delays\n152\tLIT\tHOU\tLong Delays\n152\tTPA\tATL\tLong Delays\n152\tSAT\tLAX\tLong Delays\n152\tFLL\tMCO\tLong Delays\n152\tPHX\tMCO\tLong Delays\n151\tATL\tPNS\tLong Delays\n151\tLGA\tCAK\tLong Delays\n151\tATL\tEWR\tLong Delays\n151\tHOU\tDEN\tLong Delays\n151\tBOS\tBWI\tLong Delays\n150\tDAL\tHOU\tLong Delays\n150\tBOS\tMDW\tLong Delays\n150\tBOS\tMKE\tLong Delays\n150\tHOU\tBNA\tLong Delays\n150\tMCO\tBWI\tLong Delays\n149\tHOU\tTUL\tLong Delays\n149\tHOU\tSAT\tLong Delays\n149\tBNA\tLAX\tLong Delays\n149\tSAN\tMKE\tLong Delays\n149\tMDW\tLAS\tLong Delays\n149\tPHL\tPBI\tLong Delays\n148\tLIH\tHNL\tLong Delays\n148\tPHL\tATL\tLong Delays\n148\tBWI\tMKE\tLong Delays\n148\tMDW\tIND\tLong Delays\n148\tATL\tICT\tLong Delays\n148\tPHL\tMCO\tLong Delays\n148\tSAN\tMDW\tLong Delays\n148\tSRQ\tATL\tLong Delays\n148\tPIT\tPHL\tLong Delays\n148\tMSY\tATL\tLong Delays\n148\tHPN\tATL\tLong Delays\n147\tATL\tLGA\tLong Delays\n147\tSDF\tMDW\tLong Delays\n147\tLGA\tATL\tLong Delays\n147\tMCO\tLGA\tLong Delays\n147\tXNA\tLAX\tLong Delays\n147\tHNL\tPHX\tLong Delays\n147\tATL\tLGA\tLong Delays\n146\tIND\tMCI\tLong Delays\n146\tPBI\tPHL\tLong Delays\n146\tMCO\tPHL\tLong Delays\n146\tATL\tPHF\tLong Delays\n146\tSAN\tLAX\tLong Delays\n146\tELP\tLAX\tLong Delays\n146\tTPA\tATL\tLong Delays\n145\tATL\tMEM\tLong Delays\n145\tPIT\tMDW\tLong Delays\n145\tSBP\tLAX\tLong Delays\n145\tATL\tCAK\tLong Delays\n145\tDCA\tATL\tLong Delays\n145\tBNA\tMSY\tLong Delays\n145\tPHF\tATL\tLong Delays\n145\tSEA\tBWI\tLong Delays\n144\tMDW\tMCO\tLong Delays\n144\tBWI\tPIT\tLong Delays\n144\tCAK\tATL\tLong Delays\n144\tMKE\tMCO\tLong Delays\n143\tMCO\tDAY\tLong Delays\n143\tBWI\tDFW\tLong Delays\n143\tTPA\tIND\tLong Delays\n143\tPHX\tMDW\tLong Delays\n143\tMHT\tPHL\tLong Delays\n143\tHPN\tMCO\tLong Delays\n143\tMHT\tPHL\tLong Delays\n143\tATL\tLGA\tLong Delays\n142\tDEN\tSEA\tLong Delays\n142\tRSW\tIND\tLong Delays\n142\tDCA\tATL\tLong Delays\n142\tMCO\tBDL\tLong Delays\n142\tATL\tMCO\tLong Delays\n142\tONT\tLAS\tLong Delays\n142\tATL\tMDW\tLong Delays\n142\tAUS\tELP\tLong Delays\n142\tATL\tPHL\tLong Delays\n142\tMDW\tRSW\tLong Delays\n142\tMCO\tHOU\tLong Delays\n142\tPHL\tPIT\tLong Delays\n141\tATL\tPHX\tLong Delays\n141\tABQ\tPHX\tLong Delays\n141\tMCO\tLGA\tLong Delays\n141\tHOU\tTPA\tLong Delays\n141\tBWI\tBNA\tLong Delays\n141\tDAL\tMSY\tLong Delays\n141\tLAS\tHNL\tLong Delays\n141\tMCO\tCLE\tLong Delays\n140\tATL\tLGA\tLong Delays\n140\tMCO\tMSY\tLong Delays\n140\tBOS\tPHF\tLong Delays\n140\tSEA\tMKE\tLong Delays\n140\tBWI\tMCO\tLong Delays\n140\tMCO\tSLC\tLong Delays\n140\tPDX\tSLC\tLong Delays\n139\tMCO\tDAY\tLong Delays\n139\tSTL\tPHL\tLong Delays\n139\tABQ\tPDX\tLong Delays\n139\tLGA\tMKE\tLong Delays\n139\tATL\tMCO\tLong Delays\n139\tTPA\tATL\tLong Delays\n139\tBWI\tCLT\tLong Delays\n139\tPHL\tMHT\tLong Delays\n139\tLAX\tATL\tLong Delays\n139\tATL\tRDU\tLong Delays\n138\tDAL\tHOU\tLong Delays\n138\tMCO\tBUF\tLong Delays\n138\tHOU\tMCO\tLong Delays\n138\tMKE\tATL\tLong Delays\n138\tMCO\tISP\tLong Delays\n138\tMCI\tLAX\tLong Delays\n137\tMEM\tATL\tLong Delays\n137\tMKE\tLGA\tLong Delays\n137\tLAX\tSJC\tLong Delays\n137\tPDX\tOAK\tLong Delays\n137\tMSY\tDAL\tLong Delays\n136\tPIT\tATL\tLong Delays\n136\tDTW\tATL\tLong Delays\n136\tSAN\tSMF\tLong Delays\n136\tATL\tPHL\tLong Delays\n136\tMHT\tPHL\tLong Delays\n136\tMHT\tPHL\tLong Delays\n136\tLAX\tSMF\tLong Delays\n135\tPHF\tATL\tLong Delays\n135\tATL\tLGA\tLong Delays\n135\tPHL\tTPA\tLong Delays\n135\tLAX\tXNA\tLong Delays\n135\tATL\tSAN\tLong Delays\n135\tPHL\tMHT\tLong Delays\n135\tBUF\tMCO\tLong Delays\n135\tMHT\tBWI\tLong Delays\n135\tMCO\tPHL\tLong Delays\n135\tABQ\tPHX\tLong Delays\n134\tBDL\tBWI\tLong Delays\n134\tTPA\tJAX\tLong Delays\n134\tMCO\tLGA\tLong Delays\n134\tATL\tDFW\tLong Delays\n134\tPHL\tMCO\tLong Delays\n134\tMKE\tLAX\tLong Delays\n134\tSFO\tSAN\tLong Delays\n134\tSDF\tBWI\tLong Delays\n133\tBHM\tTPA\tLong Delays\n133\tMCO\tATL\tLong Delays\n133\tBWI\tALB\tLong Delays\n133\tPHL\tLAS\tLong Delays\n133\tDFW\tATL\tLong Delays\n133\tLGA\tMCO\tLong Delays\n133\tPHL\tMCO\tLong Delays\n133\tHNL\tLAX\tLong Delays\n132\tATL\tPHX\tLong Delays\n132\tORF\tMCO\tLong Delays\n132\tPHL\tAUS\tLong Delays\n132\tHOU\tMDW\tLong Delays\n132\tPHL\tPIT\tLong Delays\n132\tMSY\tTPA\tLong Delays\n132\tCAK\tATL\tLong Delays\n132\tATL\tRIC\tLong Delays\n132\tSMF\tSEA\tLong Delays\n132\tMCO\tDFW\tLong Delays\n132\tLAX\tMRY\tLong Delays\n132\tBNA\tPHL\tLong Delays\n131\tMCO\tDTW\tLong Delays\n131\tBNA\tSAN\tLong Delays\n131\tPHL\tATL\tLong Delays\n131\tBNA\tRDU\tLong Delays\n131\tATL\tFLL\tLong Delays\n131\tMCO\tMHT\tLong Delays\n131\tIAD\tMCO\tLong Delays\n130\tATL\tLAS\tLong Delays\n130\tMDW\tBOS\tLong Delays\n130\tMRY\tLAX\tLong Delays\n130\tMCI\tSMF\tLong Delays\n130\tICT\tATL\tLong Delays\n130\tBWI\tTPA\tLong Delays\n130\tTPA\tBNA\tLong Delays\n129\tLGA\tATL\tLong Delays\n129\tJAX\tFLL\tLong Delays\n128\tFLL\tTPA\tLong Delays\n128\tISP\tBWI\tLong Delays\n128\tPDX\tRNO\tLong Delays\n128\tLAS\tOAK\tLong Delays\n128\tBNA\tJAX\tLong Delays\n128\tMCO\tPHL\tLong Delays\n128\tATL\tMDW\tLong Delays\n127\tPHL\tATL\tLong Delays\n127\tATL\tPHL\tLong Delays\n127\tATL\tROC\tLong Delays\n127\tPHL\tPIT\tLong Delays\n127\tMCO\tBWI\tLong Delays\n127\tLAX\tSFO\tLong Delays\n127\tPHX\tBUR\tLong Delays\n127\tPHL\tMHT\tLong Delays\n127\tATL\tLGA\tLong Delays\n127\tBWI\tBOS\tLong Delays\n127\tMKE\tLAS\tLong Delays\n126\tMCO\tATL\tLong Delays\n126\tHOU\tATL\tLong Delays\n126\tLGA\tPHF\tLong Delays\n126\tMCO\tBUF\tLong Delays\n126\tDEN\tLAS\tLong Delays\n126\tMDW\tBWI\tLong Delays\n126\tFLL\tMCO\tLong Delays\n126\tMCO\tPHL\tLong Delays\n126\tPBI\tISP\tLong Delays\n125\tLGA\tATL\tLong Delays\n125\tJAX\tORF\tLong Delays\n125\tBWI\tSDF\tLong Delays\n125\tLGA\tATL\tLong Delays\n125\tIAD\tATL\tLong Delays\n125\tSFO\tMKE\tLong Delays\n125\tCAK\tBOS\tLong Delays\n124\tDAL\tAMA\tLong Delays\n124\tOAK\tBUR\tLong Delays\n124\tMDW\tBNA\tLong Delays\n124\tMDW\tATL\tLong Delays\n124\tSTL\tLAX\tLong Delays\n124\tMCO\tISP\tLong Delays\n124\tTPA\tCMH\tLong Delays\n124\tMCO\tBWI\tLong Delays\n124\tDAL\tHOU\tLong Delays\n124\tKOA\tHNL\tLong Delays\n124\tEWR\tATL\tLong Delays\n124\tSDF\tBWI\tLong Delays\n124\tSTL\tSDF\tLong Delays\n123\tPHL\tMDW\tLong Delays\n123\tATL\tLGA\tLong Delays\n123\tHNL\tLAX\tLong Delays\n123\tPHX\tTPA\tLong Delays\n123\tHOU\tELP\tLong Delays\n123\tBWI\tCLT\tLong Delays\n123\tMCO\tPHL\tLong Delays\n123\tLAX\tOAK\tLong Delays\n123\tBWI\tATL\tLong Delays\n123\tATL\tLGA\tLong Delays\n122\tPHX\tIND\tLong Delays\n122\tMDW\tTPA\tLong Delays\n122\tRDU\tATL\tLong Delays\n122\tSTL\tATL\tLong Delays\n122\tPNS\tATL\tLong Delays\n122\tLAX\tMRY\tLong Delays\n122\tTPA\tBWI\tLong Delays\n122\tTPA\tISP\tLong Delays\n122\tTPA\tBWI\tLong Delays\n122\tSLC\tOAK\tLong Delays\n122\tATL\tICT\tLong Delays\n121\tSMF\tPDX\tLong Delays\n121\tSFO\tHNL\tLong Delays\n121\tBUF\tATL\tLong Delays\n121\tHNL\tLIH\tLong Delays\n121\tHOU\tTUL\tLong Delays\n121\tMEM\tATL\tLong Delays\n121\tPHX\tLAX\tLong Delays\n121\tOAK\tLAX\tLong Delays\n120\tPHX\tONT\tEarly\n120\tBOS\tBWI\tEarly\n120\tOGG\tHNL\tEarly\n120\tLAX\tSFO\tEarly\n120\tDFW\tBWI\tEarly\n120\tATL\tDTW\tEarly\n120\tATL\tSFO\tEarly\n120\tATL\tBWI\tEarly\n119\tMCO\tMHT\tShort Delays\n119\tHPN\tFLL\tShort Delays\n119\tRDU\tPHL\tShort Delays\n119\tATL\tMKE\tShort Delays\n119\tMCO\tBUF\tShort Delays\n118\tHOU\tDAL\tShort Delays\n118\tLAX\tMDW\tShort Delays\n118\tMCO\tPHL\tShort Delays\n118\tATL\tIAD\tShort Delays\n117\tMCO\tTUL\tShort Delays\n117\tALB\tTPA\tShort Delays\n117\tATL\tMDW\tShort Delays\n117\tHRL\tHOU\tShort Delays\n117\tSFO\tSAN\tShort Delays\n117\tSDF\tTPA\tShort Delays\n117\tHRL\tHOU\tShort Delays\n117\tHOU\tDAL\tShort Delays\n117\tPHF\tLGA\tShort Delays\n117\tLGA\tATL\tShort Delays\n117\tLGA\tPHF\tShort Delays\n117\tTUL\tMCI\tShort Delays\n117\tMCO\tABQ\tShort Delays\n116\tPHX\tSFO\tShort Delays\n116\tSAT\tHOU\tShort Delays\n116\tSAN\tBNA\tShort Delays\n116\tMCO\tDAY\tShort Delays\n116\tSLC\tBWI\tShort Delays\n116\tATL\tSAN\tShort Delays\n116\tDAL\tBHM\tShort Delays\n116\tDAL\tHOU\tShort Delays\n116\tATL\tMDW\tShort Delays\n116\tTPA\tPBI\tShort Delays\n116\tHPN\tMCO\tShort Delays\n116\tATL\tBWI\tShort Delays\n116\tMCO\tHOU\tShort Delays\n116\tHOU\tLIT\tShort Delays\n115\tPBI\tHPN\tShort Delays\n115\tATL\tMDW\tShort Delays\n115\tOAK\tLAX\tShort Delays\n115\tMCO\tBNA\tShort Delays\n115\tBWI\tPWM\tShort Delays\n115\tROC\tATL\tShort Delays\n115\tPBI\tATL\tShort Delays\n115\tMCI\tSTL\tShort Delays\n114\tPHX\tSAT\tShort Delays\n114\tBNA\tTPA\tShort Delays\n114\tBWI\tBOS\tShort Delays\n114\tATL\tTPA\tShort Delays\n114\tSAN\tSFO\tShort Delays\n114\tATL\tMCI\tShort Delays\n114\tHOU\tHRL\tShort Delays\n114\tLAX\tTUS\tShort Delays\n114\tMCO\tATL\tShort Delays\n114\tBNA\tDTW\tShort Delays\n114\tATL\tLGA\tShort Delays\n114\tMCO\tCMH\tShort Delays\n114\tATL\tMCI\tShort Delays\n114\tDFW\tATL\tShort Delays\n114\tMDW\tMCO\tShort Delays\n114\tMCO\tLGA\tShort Delays\n114\tMCO\tMHT\tShort Delays\n113\tTPA\tPHL\tShort Delays\n113\tLAX\tHNL\tShort Delays\n113\tLIH\tHNL\tShort Delays\n113\tSTL\tDAL\tShort Delays\n113\tMCI\tMDW\tShort Delays\n113\tLGA\tATL\tShort Delays\n113\tMCO\tRDU\tShort Delays\n113\tDAL\tLBB\tShort Delays\n113\tPHL\tMCO\tShort Delays\n113\tMDW\tBOS\tShort Delays\n112\tHNL\tPDX\tShort Delays\n112\tPHL\tMDW\tShort Delays\n112\tMDW\tMCI\tShort Delays\n112\tMDW\tMCI\tShort Delays\n112\tPHL\tBNA\tShort Delays\n112\tATL\tBWI\tShort Delays\n112\tPHL\tMDW\tShort Delays\n112\tBWI\tBOS\tShort Delays\n112\tSAT\tDAL\tShort Delays\n112\tTPA\tBOS\tShort Delays\n112\tRSW\tATL\tShort Delays\n112\tMCO\tPHL\tShort Delays\n111\tLIH\tHNL\tShort Delays\n111\tMCO\tBOS\tShort Delays\n111\tMCO\tIAD\tShort Delays\n111\tDAL\tELP\tShort Delays\n111\tPHL\tMCO\tShort Delays\n111\tMCO\tIAD\tShort Delays\n111\tATL\tICT\tShort Delays\n111\tHOU\tMDW\tShort Delays\n111\tLAX\tOAK\tShort Delays\n111\tMCO\tBNA\tShort Delays\n111\tMSY\tPHX\tShort Delays\n110\tBOS\tBWI\tShort Delays\n110\tPIT\tATL\tShort Delays\n110\tRNO\tPHX\tShort Delays\n110\tLAS\tATL\tShort Delays\n110\tMCO\tDEN\tShort Delays\n110\tMCO\tPHL\tShort Delays\n110\tPHL\tMDW\tShort Delays\n110\tMCO\tMSP\tShort Delays\n110\tHOU\tDAL\tShort Delays\n109\tMHT\tBWI\tShort Delays\n109\tHOU\tDAL\tShort Delays\n109\tATL\tMEM\tShort Delays\n109\tLAX\tMRY\tShort Delays\n109\tELP\tPHX\tShort Delays\n109\tHOU\tSAT\tShort Delays\n109\tOAK\tPDX\tShort Delays\n109\tLGA\tMCO\tShort Delays\n109\tHOU\tLAX\tShort Delays\n109\tMDW\tSTL\tShort Delays\n109\tBOS\tCAK\tShort Delays\n109\tBWI\tSEA\tShort Delays\n108\tATL\tMIA\tShort Delays\n108\tHOU\tHRL\tShort Delays\n108\tMCO\tORF\tShort Delays\n108\tMCO\tPHX\tShort Delays\n108\tMKE\tLGA\tShort Delays\n108\tLAS\tLAX\tShort Delays\n108\tMCI\tDAL\tShort Delays\n108\tRSW\tPHL\tShort Delays\n108\tBWI\tSTL\tShort Delays\n108\tMCO\tJAN\tShort Delays\n108\tMCO\tMHT\tShort Delays\n108\tDAL\tABQ\tShort Delays\n108\tHOU\tDAL\tShort Delays\n108\tMCI\tLAS\tShort Delays\n108\tSMF\tSAN\tShort Delays\n108\tMCI\tMDW\tShort Delays\n108\tATL\tLGA\tShort Delays\n108\tMCI\tSTL\tShort Delays\n107\tPHL\tATL\tShort Delays\n107\tMDW\tDTW\tShort Delays\n107\tATL\tPHX\tShort Delays\n107\tMDW\tCLE\tShort Delays\n107\tSAT\tHOU\tShort Delays\n107\tPHL\tMHT\tShort Delays\n107\tEWR\tATL\tShort Delays\n107\tSAN\tSJC\tShort Delays\n107\tBWI\tJAX\tShort Delays\n107\tATL\tMSP\tShort Delays\n107\tABQ\tOAK\tShort Delays\n107\tSTL\tMCO\tShort Delays\n107\tSEA\tBWI\tShort Delays\n107\tDAL\tHOU\tShort Delays\n106\tSFO\tATL\tShort Delays\n106\tMDW\tBNA\tShort Delays\n106\tHNL\tOGG\tShort Delays\n106\tTPA\tPBI\tShort Delays\n106\tATL\tMDW\tShort Delays\n106\tLAS\tATL\tShort Delays\n106\tMKE\tBWI\tShort Delays\n106\tATL\tEWR\tShort Delays\n106\tATL\tPHX\tShort Delays\n106\tMCO\tRSW\tShort Delays\n106\tMCO\tBOS\tShort Delays\n106\tAUS\tMAF\tShort Delays\n106\tLGA\tATL\tShort Delays\n106\tATL\tBOS\tShort Delays\n106\tMCO\tPHL\tShort Delays\n105\tTPA\tPHL\tShort Delays\n105\tHOU\tSTL\tShort Delays\n105\tATL\tLAS\tShort Delays\n105\tPHL\tATL\tShort Delays\n105\tRIC\tATL\tShort Delays\n105\tDAL\tELP\tShort Delays\n105\tATL\tMCI\tShort Delays\n105\tMCO\tRSW\tShort Delays\n105\tPVD\tBWI\tShort Delays\n105\tHOU\tDAL\tShort Delays\n105\tHOU\tMAF\tShort Delays\n105\tLGA\tATL\tShort Delays\n105\tMDW\tMCI\tShort Delays\n105\tATL\tBWI\tShort Delays\n105\tBWI\tPBI\tShort Delays\n104\tATL\tDFW\tShort Delays\n104\tGPT\tFLL\tShort Delays\n104\tSTL\tTUL\tShort Delays\n104\tABQ\tSEA\tShort Delays\n104\tRDU\tBNA\tShort Delays\n104\tBWI\tDEN\tShort Delays\n104\tOGG\tHNL\tShort Delays\n104\tMCO\tBWI\tShort Delays\n104\tBNA\tAUS\tShort Delays\n104\tMCO\tISP\tShort Delays\n104\tATL\tBWI\tShort Delays\n104\tJAX\tATL\tShort Delays\n104\tATL\tEWR\tShort Delays\n104\tMCO\tLGA\tShort Delays\n104\tISP\tBWI\tShort Delays\n103\tBNA\tSAT\tShort Delays\n103\tPIT\tPHL\tShort Delays\n103\tPHX\tSMF\tShort Delays\n103\tLAS\tSFO\tShort Delays\n103\tPHX\tLAS\tShort Delays\n103\tDEN\tPHX\tShort Delays\n103\tBOS\tMDW\tShort Delays\n103\tATL\tMCO\tShort Delays\n103\tMCO\tMHT\tShort Delays\n103\tSEA\tABQ\tShort Delays\n103\tPHX\tPDX\tShort Delays\n103\tELP\tPHX\tShort Delays\n103\tMHT\tPHL\tShort Delays\n103\tHNL\tPHX\tShort Delays\n103\tPHL\tPVD\tShort Delays\n103\tMCO\tLGA\tShort Delays\n103\tDEN\tSLC\tShort Delays\n102\tMDW\tFLL\tShort Delays\n102\tPHF\tLGA\tShort Delays\n102\tDAL\tABQ\tShort Delays\n102\tOAK\tSEA\tShort Delays\n102\tLGA\tATL\tShort Delays\n102\tMCO\tFLL\tShort Delays\n102\tLAX\tHNL\tShort Delays\n102\tPHL\tRDU\tShort Delays\n102\tSAN\tSFO\tShort Delays\n102\tAUS\tDAL\tShort Delays\n102\tPHX\tOAK\tShort Delays\n102\tPHX\tSFO\tShort Delays\n102\tLBB\tDAL\tShort Delays\n102\tTPA\tPVD\tShort Delays\n101\tATL\tIND\tShort Delays\n101\tDAL\tSTL\tShort Delays\n101\tHNL\tLAS\tShort Delays\n101\tPBI\tBOS\tShort Delays\n101\tRDU\tBWI\tShort Delays\n101\tLAX\tSAN\tShort Delays\n101\tIAD\tATL\tShort Delays\n101\tATL\tEWR\tShort Delays\n101\tATL\tSRQ\tShort Delays\n101\tMCO\tMHT\tShort Delays\n100\tSFO\tMKE\tShort Delays\n100\tHOU\tELP\tShort Delays\n100\tABQ\tDAL\tShort Delays\n100\tPDX\tRNO\tShort Delays\n100\tATL\tHOU\tShort Delays\n100\tHNL\tSFO\tShort Delays\n100\tHNL\tOGG\tShort Delays\n100\tHOU\tOKC\tShort Delays\n100\tPHL\tFLL\tShort Delays\n100\tPHX\tSTL\tShort Delays\n100\tATL\tRDU\tShort Delays\n100\tMCO\tPVD\tShort Delays\n100\tHOU\tBWI\tShort Delays\n100\tLAX\tLAS\tShort Delays\n100\tMCO\tPIT\tShort Delays\n100\tSFO\tSAN\tShort Delays\n100\tBWI\tATL\tShort Delays\n100\tMDW\tTPA\tShort Delays\n100\tPHF\tLGA\tShort Delays\n99\tATL\tMDW\tShort Delays\n99\tMCO\tPHL\tShort Delays\n99\tMCO\tPVD\tShort Delays\n99\tMCO\tBWI\tShort Delays\n99\tFLL\tHOU\tShort Delays\n99\tELP\tSAT\tShort Delays\n99\tMCO\tATL\tShort Delays\n99\tHRL\tHOU\tShort Delays\n99\tTPA\tMDW\tShort Delays\n99\tATL\tCAK\tShort Delays\n99\tATL\tCLT\tShort Delays\n99\tDAL\tMCI\tShort Delays\n99\tMCO\tCLT\tShort Delays\n99\tMCO\tRDU\tShort Delays\n99\tLGA\tCAK\tShort Delays\n99\tDAL\tMAF\tShort Delays\n99\tMAF\tHOU\tShort Delays\n98\tLAX\tIND\tShort Delays\n98\tMDW\tCLE\tShort Delays\n98\tMCO\tPHL\tShort Delays\n98\tDAL\tAMA\tShort Delays\n98\tMCI\tLAS\tShort Delays\n98\tHOU\tDAL\tShort Delays\n98\tATL\tLGA\tShort Delays\n98\tHOU\tMSY\tShort Delays\n98\tRSW\tATL\tShort Delays\n98\tHOU\tAUS\tShort Delays\n98\tSAN\tLAX\tShort Delays\n98\tTPA\tPHL\tShort Delays\n98\tATL\tPIT\tShort Delays\n98\tCAK\tLGA\tShort Delays\n98\tJAX\tBNA\tShort Delays\n98\tATL\tLGA\tShort Delays\n98\tLAS\tLAX\tShort Delays\n98\tPHL\tRDU\tShort Delays\n98\tATL\tMCI\tShort Delays\n98\tATL\tEWR\tShort Delays\n98\tFLL\tATL\tShort Delays\n98\tATL\tLAX\tShort Delays\n97\tBOS\tBWI\tShort Delays\n97\tLAS\tSFO\tShort Delays\n97\tPVD\tBWI\tShort Delays\n97\tDAL\tHOU\tShort Delays\n97\tGPT\tATL\tShort Delays\n97\tHOU\tAUS\tShort Delays\n97\tDFW\tATL\tShort Delays\n97\tMHT\tMCO\tShort Delays\n97\tSAN\tPHX\tShort Delays\n97\tHOU\tLAS\tShort Delays\n97\tLBB\tDAL\tShort Delays\n97\tDAL\tHOU\tShort Delays\n97\tLGA\tATL\tShort Delays\n97\tPHL\tMCO\tShort Delays\n97\tMKE\tLGA\tShort Delays\n97\tMCI\tDAL\tShort Delays\n97\tMDW\tSAN\tShort Delays\n96\tPIT\tPHL\tShort Delays\n96\tATL\tLAX\tShort Delays\n96\tATL\tLGA\tShort Delays\n96\tDFW\tATL\tShort Delays\n96\tBNA\tMDW\tShort Delays\n96\tRNO\tSAN\tShort Delays\n96\tMCO\tATL\tShort Delays\n96\tHOU\tDAL\tShort Delays\n96\tSAN\tSJC\tShort Delays\n96\tSEA\tSJC\tShort Delays\n96\tROC\tATL\tShort Delays\n96\tPIT\tPHL\tShort Delays\n96\tSAN\tLAX\tShort Delays\n96\tPHX\tLAS\tShort Delays\n96\tATL\tEWR\tShort Delays\n96\tTPA\tFLL\tShort Delays\n96\tATL\tIAD\tShort Delays\n96\tSMF\tSAN\tShort Delays\n96\tPHL\tATL\tShort Delays\n95\tATL\tLGA\tShort Delays\n95\tELP\tSAT\tShort Delays\n95\tHOU\tDAL\tShort Delays\n95\tMCI\tBWI\tShort Delays\n95\tATL\tLAX\tShort Delays\n95\tMCI\tSAN\tShort Delays\n95\tPVD\tPHL\tShort Delays\n95\tLAS\tSMF\tShort Delays\n95\tSWF\tMCO\tShort Delays\n95\tBOS\tATL\tShort Delays\n95\tEWR\tATL\tShort Delays\n95\tATL\tPHL\tShort Delays\n95\tATL\tBUF\tShort Delays\n95\tRDU\tMDW\tShort Delays\n95\tCAK\tBOS\tShort Delays\n95\tMKE\tMCO\tShort Delays\n94\tPHF\tATL\tShort Delays\n94\tAMA\tDAL\tShort Delays\n94\tBNA\tDEN\tShort Delays\n94\tDFW\tATL\tShort Delays\n94\tATL\tHOU\tShort Delays\n94\tBWI\tSEA\tShort Delays\n94\tMEM\tATL\tShort Delays\n94\tFLL\tRDU\tShort Delays\n94\tBUF\tPHX\tShort Delays\n94\tPHX\tPHL\tShort Delays\n94\tROC\tMCO\tShort Delays\n94\tHOU\tDAL\tShort Delays\n94\tLAS\tSMF\tShort Delays\n94\tPBI\tBWI\tShort Delays\n94\tAUS\tELP\tShort Delays\n93\tATL\tEWR\tShort Delays\n93\tSTL\tOMA\tShort Delays\n93\tDAL\tSAT\tShort Delays\n93\tCHS\tATL\tShort Delays\n93\tBWI\tDFW\tShort Delays\n93\tBOS\tBWI\tShort Delays\n93\tMCO\tBWI\tShort Delays\n93\tMAF\tAUS\tShort Delays\n93\tATL\tSEA\tShort Delays\n93\tDFW\tATL\tShort Delays\n93\tIAD\tMCO\tShort Delays\n93\tMSY\tATL\tShort Delays\n93\tMCI\tPDX\tShort Delays\n93\tMKE\tBWI\tShort Delays\n93\tMEM\tMCO\tShort Delays\n93\tRDU\tPHL\tShort Delays\n93\tDEN\tSAN\tShort Delays\n93\tHOU\tMDW\tShort Delays\n93\tPHL\tPBI\tShort Delays\n93\tHOU\tLAX\tShort Delays\n93\tSAN\tLAX\tShort Delays\n92\tATL\tMLI\tShort Delays\n92\tATL\tMEM\tShort Delays\n92\tBOS\tPHF\tShort Delays\n92\tLGA\tATL\tShort Delays\n92\tPDX\tLAS\tShort Delays\n92\tTPA\tHOU\tShort Delays\n92\tATL\tLGA\tShort Delays\n92\tSTL\tMCI\tShort Delays\n92\tPHF\tBOS\tShort Delays\n91\tATL\tGPT\tShort Delays\n91\tHOU\tATL\tShort Delays\n91\tATL\tLGA\tShort Delays\n91\tPHL\tMCO\tShort Delays\n91\tSMF\tSAN\tShort Delays\n91\tLGA\tATL\tShort Delays\n91\tSAT\tHRL\tShort Delays\n91\tBNA\tHOU\tShort Delays\n91\tSJC\tBUR\tShort Delays\n91\tIND\tTPA\tShort Delays\n91\tMCO\tDAY\tShort Delays\n91\tAUS\tDEN\tShort Delays\n91\tMCO\tMHT\tShort Delays\n91\tMSY\tHOU\tShort Delays\n91\tRSW\tMDW\tShort Delays\n91\tFLL\tMCO\tShort Delays\n91\tATL\tBWI\tShort Delays\n91\tBWI\tROC\tShort Delays\n90\tATL\tMCO\tShort Delays\n90\tEWR\tATL\tShort Delays\n90\tHOU\tDAL\tShort Delays\n90\tATL\tDCA\tShort Delays\n90\tMSP\tATL\tShort Delays\n90\tSTL\tCLE\tShort Delays\n90\tSFO\tPHX\tShort Delays\n90\tLGA\tCAK\tShort Delays\n90\tMDW\tATL\tShort Delays\n90\tHOU\tMSY\tShort Delays\n90\tFLL\tJAX\tShort Delays\n90\tAUS\tELP\tShort Delays\n90\tLGA\tCAK\tShort Delays\n90\tTUL\tMCI\tShort Delays\n90\tIAD\tTPA\tShort Delays\n90\tMCI\tDAL\tShort Delays\n89\tSAN\tPHX\tShort Delays\n89\tMRY\tLAX\tShort Delays\n89\tIND\tTPA\tShort Delays\n89\tMCO\tORF\tShort Delays\n89\tFLL\tBUF\tShort Delays\n89\tPBI\tBWI\tShort Delays\n89\tALB\tBWI\tShort Delays\n89\tBWI\tBUF\tShort Delays\n89\tHOU\tMAF\tShort Delays\n89\tBWI\tRDU\tShort Delays\n89\tORF\tMDW\tShort Delays\n89\tLAX\tLAS\tShort Delays\n89\tOAK\tSLC\tShort Delays\n89\tLAS\tATL\tShort Delays\n89\tOGG\tHNL\tShort Delays\n88\tATL\tPHL\tShort Delays\n88\tMCO\tLGA\tShort Delays\n88\tATL\tDFW\tShort Delays\n88\tBWI\tBOS\tShort Delays\n88\tSTL\tPHX\tShort Delays\n88\tSFO\tLAS\tShort Delays\n88\tMCO\tIAD\tShort Delays\n88\tPIT\tPHL\tShort Delays\n88\tPHF\tBOS\tShort Delays\n88\tSAN\tLAS\tShort Delays\n88\tPHL\tPVD\tShort Delays\n88\tLGA\tATL\tShort Delays\n88\tMKE\tLGA\tShort Delays\n88\tLGA\tATL\tShort Delays\n88\tPHX\tABQ\tShort Delays\n88\tKOA\tHNL\tShort Delays\n88\tDAL\tAMA\tShort Delays\n88\tBNA\tFLL\tShort Delays\n88\tMDW\tPHX\tShort Delays\n88\tMDW\tSDF\tShort Delays\n88\tDTW\tPHX\tShort Delays\n88\tMDW\tDTW\tShort Delays\n88\tHNL\tLAX\tShort Delays\n88\tATL\tLGA\tShort Delays\n88\tMDW\tLAX\tShort Delays\n88\tMKE\tLAX\tShort Delays\n"
+          },
+          {
+            "type": "HTML",
+            "data": "<div class=\"result-alert alert-warning\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button><strong>Output is truncated</strong> to 1000 rows. Learn more about <strong>zeppelin.spark.maxResult</strong></div>\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://zeppelin:4050/jobs/job?id=15",
+              "$$hashKey": "object:125135"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1662637236126_18402621",
+      "id": "paragraph_1661939492967_1779601538",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:03:08+0000",
+      "dateFinished": "2022-09-08T14:03:10+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:123937"
+    },
+    {
+      "text": "val flightDelayUsageOptDf = spark.sql(\"\"\"\nSELECT arrival_delay, origin_airport_iata, destination_airport_iata,\n    CASE\n         WHEN arrival_delay > 360 THEN 'Very Long Delays'\n         WHEN arrival_delay > 120 AND arrival_delay < 360 THEN 'Long Delays'\n         WHEN arrival_delay > 60 AND arrival_delay < 120 THEN 'Short Delays'\n         WHEN arrival_delay > 0 and arrival_delay < 60 THEN 'Tolerable Delays'\n         WHEN arrival_delay = 0 THEN 'No Delays'\n         ELSE 'Early'\n    END AS flight_delays\n         FROM ref_flight_t\n         ORDER BY arrival_delay DESC\n\"\"\")\n",
+      "user": "admin",
+      "dateUpdated": "2022-09-08T14:03:29+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mflightDelayUsageOptDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [arrival_delay: int, origin_airport_iata: string ... 2 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1662637236126_11938254",
+      "id": "paragraph_1661939498635_1729619232",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:03:29+0000",
+      "dateFinished": "2022-09-08T14:03:29+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:123938"
+    },
+    {
+      "text": "flightDelayUsageOptDf.write.parquet(\"s3a://flight-bucket/usageopt/flight_delays\")",
+      "user": "admin",
+      "dateUpdated": "2022-09-08T14:03:44+0000",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://zeppelin:4050/jobs/job?id=17",
+              "$$hashKey": "object:125161"
+            },
+            {
+              "jobUrl": "http://zeppelin:4050/jobs/job?id=18",
+              "$$hashKey": "object:125162"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1662637236127_281224601",
+      "id": "paragraph_1661939543334_1162401781",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:03:44+0000",
+      "dateFinished": "2022-09-08T14:04:08+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:123939"
+    },
+    {
+      "text": "flightDelayUsageOptDf.createOrReplaceTempView(\"usageopt_flight_delay_t\")",
+      "user": "admin",
+      "dateUpdated": "2022-09-08T14:04:47+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1662637236127_630695631",
+      "id": "paragraph_1661939584498_629984274",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:04:47+0000",
+      "dateFinished": "2022-09-08T14:04:47+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:123940"
     },
     {
       "text": "%md\n### Data Product Zone (ACL)\n",
       "user": "admin",
-      "dateUpdated": "2022-08-31T08:49:25+0000",
+      "dateUpdated": "2022-09-08T11:40:36+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -1891,18 +1938,16 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661933541718_1456358278",
+      "jobName": "paragraph_1662637236127_1978607705",
       "id": "paragraph_1661933541718_1456358278",
-      "dateCreated": "2022-08-31T08:12:21+0000",
-      "dateStarted": "2022-08-31T08:49:25+0000",
-      "dateFinished": "2022-08-31T08:49:25+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:210750"
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "status": "READY",
+      "$$hashKey": "object:123941"
     },
     {
-      "text": "val flightDpDf = spark.sql(\"\"\"\nSELECT f.year\n,   f.month\n,   f.day_of_month\n,   f.day_of_week\n,   f.departure_time\n,   f.scheduled_departure_time\n,   f.arrival_time\n,   f.scheduled_arrival_time\n,   f.unique_carrier\n,   f.flight_number\n,   f.tail_number\n,   f.actual_elapsed_time\n,   f.estimated_elapsed_time\n,   f.airtime\n,   f.arrival_delay\n,   f.departure_delay\n,   f.origin_airport_iata\n,   f.destination_airport_iata\n,   f.distance\n,   f.taxi_in\n,   f.taxi_out\n,   f.cancelled\n,   f.cancellation_code\n,   f.cancellation_reason\n,   f.diverted\n,   f.carrier_delay\n,   f.weather_delay\n,   f.nas_delay\n,   f.security_delay\n,   f.late_aircraft_delay\nFROM ref_flight_t    f\n\"\"\")\n",
+      "text": "val flightDpDf = spark.sql(\"\"\"\nSELECT f.year\n,   f.month\n,   f.day_of_month\n,   f.day_of_week\n,   f.departure_time\n,   f.scheduled_departure_time\n,   f.arrival_time\n,   f.scheduled_arrival_time\n,   f.unique_carrier\n,   f.flight_number\n,   f.tail_number\n,   f.actual_elapsed_time\n,   f.estimated_elapsed_time\n,   f.airtime\n,   f.arrival_delay\n,   f.departure_delay\n,   f.origin_airport_iata\n,   f.origin_airport\n,   f.origin_city\n,   f.destination_airport_iata\n,   f.destination_airport\n,   f.destination_city\n,   f.distance\n,   f.taxi_in\n,   f.taxi_out\n,   f.cancelled\n,   f.cancellation_code\n,   f.cancellation_reason\n,   f.diverted\n,   f.carrier_delay\n,   f.weather_delay\n,   f.nas_delay\n,   f.security_delay\n,   f.late_aircraft_delay\nFROM usageopt_flight_t    f\n\"\"\")\n",
       "user": "admin",
-      "dateUpdated": "2022-08-31T09:43:49+0000",
+      "dateUpdated": "2022-09-08T14:22:22+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -1926,25 +1971,25 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\u001b[1m\u001b[34mflightDpDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [year: int, month: int ... 28 more fields]\n"
+            "data": "\u001b[1m\u001b[34mflightDpDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [year: int, month: int ... 32 more fields]\n"
           }
         ]
       },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661934727593_1476685960",
+      "jobName": "paragraph_1662637236127_1993975143",
       "id": "paragraph_1661934727593_1476685960",
-      "dateCreated": "2022-08-31T08:32:07+0000",
-      "dateStarted": "2022-08-31T09:43:49+0000",
-      "dateFinished": "2022-08-31T09:43:50+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:22:22+0000",
+      "dateFinished": "2022-09-08T14:22:22+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210751"
+      "$$hashKey": "object:123942"
     },
     {
       "text": "flightDpDf.printSchema()",
       "user": "admin",
-      "dateUpdated": "2022-08-31T10:05:05+0000",
+      "dateUpdated": "2022-09-08T14:19:23+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -1968,26 +2013,26 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "root\n |-- year: integer (nullable = true)\n |-- month: integer (nullable = true)\n |-- day_of_month: integer (nullable = true)\n |-- day_of_week: integer (nullable = true)\n |-- departure_time: integer (nullable = true)\n |-- scheduled_departure_time: integer (nullable = true)\n |-- arrival_time: integer (nullable = true)\n |-- scheduled_arrival_time: integer (nullable = true)\n |-- unique_carrier: string (nullable = true)\n |-- flight_number: string (nullable = true)\n |-- tail_number: string (nullable = true)\n |-- actual_elapsed_time: integer (nullable = true)\n |-- estimated_elapsed_time: integer (nullable = true)\n |-- airtime: integer (nullable = true)\n |-- arrival_delay: integer (nullable = true)\n |-- departure_delay: integer (nullable = true)\n |-- origin_airport_iata: string (nullable = true)\n |-- destination_airport_iata: string (nullable = true)\n |-- distance: integer (nullable = true)\n |-- taxi_in: integer (nullable = true)\n |-- taxi_out: integer (nullable = true)\n |-- cancelled: integer (nullable = true)\n |-- cancellation_code: string (nullable = true)\n |-- cancellation_reason: string (nullable = true)\n |-- diverted: string (nullable = true)\n |-- carrier_delay: integer (nullable = true)\n |-- weather_delay: integer (nullable = true)\n |-- nas_delay: integer (nullable = true)\n |-- security_delay: integer (nullable = true)\n |-- late_aircraft_delay: integer (nullable = true)\n\n"
+            "data": "root\n |-- year: integer (nullable = true)\n |-- month: integer (nullable = true)\n |-- day_of_month: integer (nullable = true)\n |-- day_of_week: integer (nullable = true)\n |-- departure_time: integer (nullable = true)\n |-- scheduled_departure_time: integer (nullable = true)\n |-- arrival_time: integer (nullable = true)\n |-- scheduled_arrival_time: integer (nullable = true)\n |-- unique_carrier: string (nullable = true)\n |-- flight_number: string (nullable = true)\n |-- tail_number: string (nullable = true)\n |-- actual_elapsed_time: integer (nullable = true)\n |-- estimated_elapsed_time: integer (nullable = true)\n |-- airtime: integer (nullable = true)\n |-- arrival_delay: integer (nullable = true)\n |-- departure_delay: integer (nullable = true)\n |-- origin_airport_iata: string (nullable = true)\n |-- origin_airport: string (nullable = true)\n |-- origin_city: string (nullable = true)\n |-- destination_airport_iata: string (nullable = true)\n |-- destination_airport: string (nullable = true)\n |-- destination_city: string (nullable = true)\n |-- distance: integer (nullable = true)\n |-- taxi_in: integer (nullable = true)\n |-- taxi_out: integer (nullable = true)\n |-- cancelled: integer (nullable = true)\n |-- cancellation_code: string (nullable = true)\n |-- cancellation_reason: string (nullable = true)\n |-- diverted: string (nullable = true)\n |-- carrier_delay: integer (nullable = true)\n |-- weather_delay: integer (nullable = true)\n |-- nas_delay: integer (nullable = true)\n |-- security_delay: integer (nullable = true)\n |-- late_aircraft_delay: integer (nullable = true)\n\n"
           }
         ]
       },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661940298076_1271827281",
+      "jobName": "paragraph_1662637236127_1626395326",
       "id": "paragraph_1661940298076_1271827281",
-      "dateCreated": "2022-08-31T10:04:58+0000",
-      "dateStarted": "2022-08-31T10:05:05+0000",
-      "dateFinished": "2022-08-31T10:05:05+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:19:23+0000",
+      "dateFinished": "2022-09-08T14:19:24+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210752"
+      "$$hashKey": "object:123943"
     },
     {
       "text": "flightDpDf.write.parquet(\"s3a://flight-bucket/dp/v1/flights\")\n",
       "user": "admin",
-      "dateUpdated": "2022-08-31T09:43:52+0000",
-      "progress": 100,
+      "dateUpdated": "2022-09-08T14:22:26+0000",
+      "progress": 66,
       "config": {
         "editorSetting": {
           "language": "scala",
@@ -2018,26 +2063,26 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://zeppelin:4050/jobs/job?id=60",
-              "$$hashKey": "object:211962"
+              "jobUrl": "http://zeppelin:4050/jobs/job?id=25",
+              "$$hashKey": "object:125225"
             }
           ],
           "interpreterSettingId": "spark"
         }
       },
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661933572041_222369810",
+      "jobName": "paragraph_1662637236127_65879694",
       "id": "paragraph_1661933572041_222369810",
-      "dateCreated": "2022-08-31T08:12:52+0000",
-      "dateStarted": "2022-08-31T09:43:52+0000",
-      "dateFinished": "2022-08-31T09:43:55+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:22:26+0000",
+      "dateFinished": "2022-09-08T14:22:28+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210753"
+      "$$hashKey": "object:123944"
     },
     {
       "text": "flightDpDf.createOrReplaceTempView(\"dp_flight_v1_t\")",
       "user": "admin",
-      "dateUpdated": "2022-08-31T09:44:36+0000",
+      "dateUpdated": "2022-09-08T14:22:30+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -2063,19 +2108,19 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661939039298_1975085307",
+      "jobName": "paragraph_1662637236127_703358059",
       "id": "paragraph_1661939039298_1975085307",
-      "dateCreated": "2022-08-31T09:43:59+0000",
-      "dateStarted": "2022-08-31T09:44:36+0000",
-      "dateFinished": "2022-08-31T09:44:37+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:22:30+0000",
+      "dateFinished": "2022-09-08T14:22:30+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210754"
+      "$$hashKey": "object:123945"
     },
     {
-      "text": "val flightDelayDpDf = spark.sql(\"\"\"\nSELECT fd.arrival_delay\n,   fd.origin_airport_iata\n,   fd.destination_airport_iata\n,   fd.flight_delays\nFROM ref_flight_delay_t    fd\n\"\"\")\n",
+      "text": "val flightDelayDpDf = spark.sql(\"\"\"\nSELECT fd.arrival_delay\n,   fd.origin_airport_iata\n,   fd.destination_airport_iata\n,   fd.flight_delays\nFROM usageopt_flight_delay_t    fd\n\"\"\")\n",
       "user": "admin",
-      "dateUpdated": "2022-08-31T10:22:54+0000",
-      "progress": 66,
+      "dateUpdated": "2022-09-08T14:05:24+0000",
+      "progress": 0,
       "config": {
         "editorSetting": {
           "language": "scala",
@@ -2136,18 +2181,18 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661939032680_1270399802",
+      "jobName": "paragraph_1662637236127_1377924578",
       "id": "paragraph_1661939032680_1270399802",
-      "dateCreated": "2022-08-31T09:43:52+0000",
-      "dateStarted": "2022-08-31T10:22:54+0000",
-      "dateFinished": "2022-08-31T10:22:54+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:05:24+0000",
+      "dateFinished": "2022-09-08T14:05:24+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210755"
+      "$$hashKey": "object:123946"
     },
     {
       "text": "flightDelayDpDf.write.parquet(\"s3a://flight-bucket/dp/v1/flight_delays\")\n",
       "user": "admin",
-      "dateUpdated": "2022-08-31T10:23:22+0000",
+      "dateUpdated": "2022-09-08T14:05:27+0000",
       "progress": 100,
       "config": {
         "editorSetting": {
@@ -2179,30 +2224,30 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://zeppelin:4050/jobs/job?id=69",
-              "$$hashKey": "object:211997"
+              "jobUrl": "http://zeppelin:4050/jobs/job?id=22",
+              "$$hashKey": "object:125260"
             },
             {
-              "jobUrl": "http://zeppelin:4050/jobs/job?id=70",
-              "$$hashKey": "object:211998"
+              "jobUrl": "http://zeppelin:4050/jobs/job?id=23",
+              "$$hashKey": "object:125261"
             }
           ],
           "interpreterSettingId": "spark"
         }
       },
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661939425175_1946901799",
+      "jobName": "paragraph_1662637236128_841697752",
       "id": "paragraph_1661939425175_1946901799",
-      "dateCreated": "2022-08-31T09:50:25+0000",
-      "dateStarted": "2022-08-31T10:23:22+0000",
-      "dateFinished": "2022-08-31T10:23:35+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:05:27+0000",
+      "dateFinished": "2022-09-08T14:05:44+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210756"
+      "$$hashKey": "object:123947"
     },
     {
       "text": "flightDelayDpDf.createOrReplaceTempView(\"dp_flight_delays_v1_t\")",
       "user": "admin",
-      "dateUpdated": "2022-08-31T10:23:36+0000",
+      "dateUpdated": "2022-09-08T14:05:34+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -2228,19 +2273,19 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661939704227_765144913",
+      "jobName": "paragraph_1662637236128_123710165",
       "id": "paragraph_1661939704227_765144913",
-      "dateCreated": "2022-08-31T09:55:04+0000",
-      "dateStarted": "2022-08-31T10:23:36+0000",
-      "dateFinished": "2022-08-31T10:23:37+0000",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T14:05:34+0000",
+      "dateFinished": "2022-09-08T14:05:45+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:210757"
+      "$$hashKey": "object:123948"
     },
     {
       "text": "%sql\nSELECT * FROM dp_flight_delays_v1_t",
       "user": "admin",
-      "dateUpdated": "2022-08-31T10:23:40+0000",
-      "progress": 33,
+      "dateUpdated": "2022-09-08T14:07:15+0000",
+      "progress": 0,
       "config": {
         "editorSetting": {
           "language": "sql",
@@ -2259,7 +2304,62 @@
               "optionOpen": false,
               "setting": {
                 "table": {
-                  "tableGridState": {},
+                  "tableGridState": {
+                    "columns": [
+                      {
+                        "name": "arrival_delay0",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "origin_airport_iata1",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "destination_airport_iata2",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "flight_delays3",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      }
+                    ],
+                    "scrollFocus": {},
+                    "selection": [],
+                    "grouping": {
+                      "grouping": [],
+                      "aggregations": [],
+                      "rowExpandedStates": {}
+                    },
+                    "treeView": {},
+                    "pagination": {
+                      "paginationCurrentPage": 1,
+                      "paginationPageSize": 250
+                    }
+                  },
                   "tableColumnTypeState": {
                     "names": {
                       "arrival_delay": "string",
@@ -2303,34 +2403,62 @@
         ]
       },
       "apps": [],
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            {
-              "jobUrl": "http://zeppelin:4050/jobs/job?id=71",
-              "$$hashKey": "object:212048"
-            }
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661939742098_505170798",
+      "jobName": "paragraph_1662637236128_1595825051",
       "id": "paragraph_1661939742098_505170798",
-      "dateCreated": "2022-08-31T09:55:42+0000",
-      "dateStarted": "2022-08-31T10:23:39+0000",
-      "dateFinished": "2022-08-31T10:23:39+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:210758"
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "status": "READY",
+      "$$hashKey": "object:123949"
     },
     {
-      "text": "%sql\n",
+      "text": "%md\nLet's register the data product as a Hive table (so it is available in Trino)\n\nConnect to Hive-Metastore and create the `flight_db` database:\n\n```\ndocker exec -ti hive-metastore hive\nCREATE DATABASE operations_db;\nUSE operations_db;\n```\n\nand create the following tables\n\n```sql\nCREATE EXTERNAL TABLE dp_flight_v1_t ( year integer\n                            , month integer\n                            , day_of_month integer\n                            , day_of_week integer\n                            \n                             , origin_airport_iata string\n                             , destination_airport_iata string\n                             , flight_delays string)\nSTORED AS parquet\nLOCATION 's3a://flight-bucket/dp/v1/flight_delays';\n```\n\n```\nCREATE EXTERNAL TABLE dp_flight_delays_v1_t ( arrival_delay integer\n                             , origin_airport_iata string\n                             , destination_airport_iata string\n                             , flight_delays string)\nSTORED AS parquet\nLOCATION 's3a://flight-bucket/dp/v1/flight_delays';\n```",
       "user": "admin",
-      "dateUpdated": "2022-08-31T09:55:58+0000",
+      "dateUpdated": "2022-09-08T21:26:18+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>Let&rsquo;s register the data product as a Hive table (so it is available in Trino)</p>\n<p>Connect to Hive-Metastore and create the <code>flight_db</code> database:</p>\n<pre><code>docker exec -ti hive-metastore hive\nCREATE DATABASE operations_db;\nUSE operations_db;\n</code></pre>\n<p>and create the following tables</p>\n<pre><code class=\"language-sql\">CREATE EXTERNAL TABLE dp_flight_v1_t ( year integer\n                            , month integer\n                            , day_of_month integer\n                            , day_of_week integer\n                            \n                             , origin_airport_iata string\n                             , destination_airport_iata string\n                             , flight_delays string)\nSTORED AS parquet\nLOCATION 's3a://flight-bucket/dp/v1/flight_delays';\n</code></pre>\n<pre><code>CREATE EXTERNAL TABLE dp_flight_delays_v1_t ( arrival_delay integer\n                             , origin_airport_iata string\n                             , destination_airport_iata string\n                             , flight_delays string)\nSTORED AS parquet\nLOCATION 's3a://flight-bucket/dp/v1/flight_delays';\n</code></pre>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1662637236128_1879437930",
+      "id": "paragraph_1661939758016_1517402831",
+      "dateCreated": "2022-09-08T11:40:36+0000",
+      "dateStarted": "2022-09-08T21:26:18+0000",
+      "dateFinished": "2022-09-08T21:26:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:123950"
+    },
+    {
+      "text": "%md\n",
+      "user": "admin",
+      "dateUpdated": "2022-09-08T14:12:12+0000",
       "progress": 0,
       "config": {
         "colWidth": 12,
@@ -2338,12 +2466,12 @@
         "enabled": true,
         "results": {},
         "editorSetting": {
-          "language": "sql",
-          "editOnDblClick": false,
+          "language": "markdown",
+          "editOnDblClick": true,
           "completionKey": "TAB",
-          "completionSupport": true
+          "completionSupport": false
         },
-        "editorMode": "ace/mode/sql"
+        "editorMode": "ace/mode/markdown"
       },
       "settings": {
         "params": {},
@@ -2352,15 +2480,15 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1661939758016_1517402831",
-      "id": "paragraph_1661939758016_1517402831",
-      "dateCreated": "2022-08-31T09:55:58+0000",
+      "jobName": "paragraph_1662646332491_1974744235",
+      "id": "paragraph_1662646332491_1974744235",
+      "dateCreated": "2022-09-08T14:12:12+0000",
       "status": "READY",
-      "$$hashKey": "object:210759"
+      "$$hashKey": "object:123951"
     }
   ],
-  "name": "Spark",
-  "id": "2HEQ99CXM",
+  "name": "Data Mesh Demo (Materialized Data Product)",
+  "id": "2HDK94M3W",
   "defaultInterpreterGroup": "spark",
   "version": "0.10.0",
   "noteParams": {},
@@ -2372,5 +2500,5 @@
     "personalizedMode": "false"
   },
   "info": {},
-  "path": "/Spark"
+  "path": "/Data Mesh Demo (Materialized Data Product)"
 }

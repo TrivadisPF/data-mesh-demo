@@ -4,6 +4,10 @@ This demo concentrates on showing the concept of providing Data Products of a Da
 
 ![](./images/overview.png)
 
+We will use the data zones 
+
+![](./images/data-zones-to-extract-data-product.png)
+
 
 The following technologies will be shown as data products
 

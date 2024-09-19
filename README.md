@@ -16,8 +16,8 @@ The following technologies will be shown as data products
 * data stream of action events
 * data stream of state change events
 * [done] table format
-* [done] REST API
-* [done] GraphQL API 
+* REST API
+* GraphQL API 
 * [done] Virtual Data Set
 * Visualizations and dashboards
 
@@ -34,7 +34,7 @@ docker-compose up -d
 
 ### Minio (S3)
 
-A bucket named `flight-data` has been created while initializing the platform. No let's copy some data into this bucket.
+A bucket named `flight-data` has been created while initialising the platform. Now let's copy some data into this bucket.
 
 ```bash
 docker exec -ti awscli s3cmd put /data-transfer/flight-data/airports.csv s3://flight-bucket/raw/airports/airports.csv
@@ -57,7 +57,7 @@ docker exec -ti awscli s3cmd put /data-transfer/flight-data/flights-small/flight
 
 ## Building Materialized Data Product (Batch)
 
-In this section we will demonstrate how to build a materialized data product using Spark and Minio (S3).
+In this section we will demonstrate how to build a materialised data product using Spark and Minio (S3).
 
 ![Materialized DP](./images/materialized-dp.png)
 

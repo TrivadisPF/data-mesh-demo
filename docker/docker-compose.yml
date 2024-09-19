@@ -244,7 +244,7 @@ services:
       - ./data-transfer:/data-transfer
       - ./plugins/spark/jars:/extra-jars
       - ./container-volume/spark/logs/:/var/log/spark/logs
-      - ./conf/s3cfg:/root/.s3cfg.template
+      - ./conf/awscli/s3cfg.template:/root/.s3cfg.template
     restart: unless-stopped
   #  ================================== PostgreSQL ========================================== #
   postgresql:
@@ -286,7 +286,7 @@ services:
     restart: unless-stopped
   #  ================================== Trino ========================================== #
   trino-1:
-    image: trinodb/trino:394
+    image: trinodb/trino:401
     hostname: trino-1
     container_name: trino-1
     labels:
@@ -300,9 +300,11 @@ services:
       S3_AWS_ACCESS_KEY: V42FCGRVMK24JJ8DHUYG
       S3_AWS_SECRET_KEY: bKhWxVF3kQoLY9kFmt91l+tDrEoZjqnWXzY9Eza
       S3_PATH_STYLE_ACCESS: 'true'
-      POSTGRESQL_DATABASE: postgres
-      POSTGRESQL_USER: postgres
-      POSTGRESQL_PASSWORD: abc123!
+      HIVE_STORAGE_FORMAT: ORC
+      HIVE_COMPRESSION_CODEC: GZIP
+      POSTGRESQL_DATABASE:
+      POSTGRESQL_USER:
+      POSTGRESQL_PASSWORD:
       # this is only generated to keep the structure valid if no other env variables are present
       IGNORE: ignore
     volumes:
@@ -310,6 +312,8 @@ services:
       - ./conf/trino/single/config.properties:/etc/trino/config.properties
       - ./conf/trino/single/node.properties:/etc/trino/node.properties
       - ./conf/trino/catalog/minio.properties:/etc/trino/catalog/minio.properties
+      - ./conf/trino/catalog/iceberg.properties:/etc/trino/catalog/iceberg.properties
+      - ./conf/trino/catalog/delta.properties:/etc/trino/catalog/delta.properties
       - ./conf/trino/catalog/postgresql.properties:/etc/trino/catalog/postgresql.properties
       - ./security/starburstdata/password-authenticator.properties:/etc/starburst/password-authenticator.properties
       - ./security/starburstdata/password.db:/etc/starburst/password.db
@@ -336,13 +340,15 @@ services:
     ports:
       - 28177:8080
     environment:
-      HASURA_GRAPHQL_DATABASE_URL: postgres://demo:abc123!@postgresql:5432/demodb
+      # postgresql database where the business data is held
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:abc123!@postgresql:5432/postgres
+      # for metadata storage
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:abc123!@postgresql:5432/postgres
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'true' # set to "false" to disable console
       HASURA_GRAPHQL_DEV_MODE: 'true'
+      HASURA_GRAPHQL_LOG_LEVEL: info
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       HASURA_GRAPHQL_LIVE_QUERIES_MULTIPLEXED_REFETCH_INTERVAL: 1000
-      ## uncomment next line to set an admin secret
-      # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
     volumes:
       - ./data-transfer:/data-transfer
     restart: unless-stopped
@@ -357,9 +363,12 @@ services:
       com.platys.restapi.url: http://${PUBLIC_IP}:28280
     ports:
       - 28280:8080
+    env_file:
+      - ./conf/tyk/tyk.env
     environment:
       - TYK_GW_LISTENPORT=8080
       - TYK_GW_SECRET=abc123!
+      - TYK_GW_NODESECRET=abc123!
       - TYK_GW_POLICIES_POLICYSOURCE=service
       - TYK_GW_POLICIES_POLICYCONNECTIONSTRING=http://tyk-dashboard:3000
       - TYK_GW_POLICIES_POLICYRECORDNAME=tyk_policies
@@ -424,7 +433,7 @@ services:
     restart: unless-stopped
   #  ================================== Minio ========================================== #
   minio-1:
-    image: minio/minio:RELEASE.2022-08-08T18-34-09Z
+    image: minio/minio:RELEASE.2022-10-29T06-21-33Z
     container_name: minio-1
     hostname: minio-1
     labels:
@@ -483,12 +492,12 @@ services:
       AWS_DEFAULT_REGION: us-east-1
     volumes:
       - ./data-transfer:/data-transfer
-      - ./conf/s3cfg:/root/.s3cfg
+      - ./conf/awscli/s3cfg.template:/root/.s3cfg.template
     command: tail -f /dev/null
     restart: unless-stopped
   #  ================================== Wetty ========================================== #
   wetty:
-    image: svenihoney/wetty:latest
+    image: wettyoss/wetty:latest
     container_name: wetty
     hostname: wetty
     labels:
@@ -498,10 +507,12 @@ services:
     ports:
       - 3001:3000
     environment:
-      - REMOTE_SSH_SERVER=${DOCKER_HOST_IP}
-      - REMOTE_SSH_PORT=22
-      - REMOTE_SSH_USER=
-      - WETTY_PORT=3000
+      - SSHHOST=${DOCKER_HOST_IP}
+      - SSHPORT=22
+      - SSHUSER=
+      - SSHAUTH=password
+      - PORT=3000
+      - BASE=/
     volumes:
       - ./data-transfer:/data-transfer
     restart: unless-stopped
